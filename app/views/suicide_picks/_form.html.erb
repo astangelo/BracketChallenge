@@ -1,0 +1,29 @@
+<%= form_for(@suicide_pick) do |f| %>
+  <% if @suicide_pick.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@suicide_pick.errors.count, "error") %> prohibited this suicide_pick from being saved:</h2>
+
+      <ul>
+      <% @suicide_pick.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_entry_id %><br>
+    <%= f.number_field :user_entry_id %>
+  </div>
+  <div class="field">
+    <%= f.label :team_instance_id %><br>
+    <%= f.number_field :team_instance_id %>
+  </div>
+  <div class="field">
+    <%= f.label :round %><br>
+    <%= f.number_field :round %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

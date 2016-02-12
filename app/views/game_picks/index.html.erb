@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Game Picks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User entry</th>
+      <th>Team instance</th>
+      <th>Round</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @game_picks.each do |game_pick| %>
+      <tr>
+        <td><%= game_pick.user_entry_id %></td>
+        <td><%= game_pick.team_instance_id %></td>
+        <td><%= game_pick.round %></td>
+        <td><%= link_to 'Show', game_pick %></td>
+        <td><%= link_to 'Edit', edit_game_pick_path(game_pick) %></td>
+        <td><%= link_to 'Destroy', game_pick, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Game pick', new_game_pick_path %>

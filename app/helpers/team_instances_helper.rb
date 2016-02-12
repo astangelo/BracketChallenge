@@ -1,0 +1,2 @@
+module TeamInstancesHelper
+end

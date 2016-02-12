@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User entry:</strong>
+  <%= @random_pick.user_entry_id %>
+</p>
+
+<p>
+  <strong>Team instance:</strong>
+  <%= @random_pick.team_instance_id %>
+</p>
+
+<p>
+  <strong>Round:</strong>
+  <%= @random_pick.round %>
+</p>
+
+<%= link_to 'Edit', edit_random_pick_path(@random_pick) %> |
+<%= link_to 'Back', random_picks_path %>

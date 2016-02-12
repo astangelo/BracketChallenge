@@ -1,0 +1,2 @@
+module RandomPicksHelper
+end

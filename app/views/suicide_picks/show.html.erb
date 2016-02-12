@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User entry:</strong>
+  <%= @suicide_pick.user_entry_id %>
+</p>
+
+<p>
+  <strong>Team instance:</strong>
+  <%= @suicide_pick.team_instance_id %>
+</p>
+
+<p>
+  <strong>Round:</strong>
+  <%= @suicide_pick.round %>
+</p>
+
+<%= link_to 'Edit', edit_suicide_pick_path(@suicide_pick) %> |
+<%= link_to 'Back', suicide_picks_path %>

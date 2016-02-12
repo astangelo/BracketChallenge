@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Suicide Picks</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>User entry</th>
+      <th>Team instance</th>
+      <th>Round</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @suicide_picks.each do |suicide_pick| %>
+      <tr>
+        <td><%= suicide_pick.user_entry_id %></td>
+        <td><%= suicide_pick.team_instance_id %></td>
+        <td><%= suicide_pick.round %></td>
+        <td><%= link_to 'Show', suicide_pick %></td>
+        <td><%= link_to 'Edit', edit_suicide_pick_path(suicide_pick) %></td>
+        <td><%= link_to 'Destroy', suicide_pick, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Suicide pick', new_suicide_pick_path %>

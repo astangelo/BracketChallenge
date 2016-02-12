@@ -1,0 +1,37 @@
+<%= form_for(@team_instance) do |f| %>
+  <% if @team_instance.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@team_instance.errors.count, "error") %> prohibited this team_instance from being saved:</h2>
+
+      <ul>
+      <% @team_instance.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :team_id %><br>
+    <%= f.number_field :team_id %>
+  </div>
+  <div class="field">
+    <%= f.label :bracket_id %><br>
+    <%= f.number_field :bracket_id %>
+  </div>
+  <div class="field">
+    <%= f.label :quadrant_id %><br>
+    <%= f.number_field :quadrant_id %>
+  </div>
+  <div class="field">
+    <%= f.label :abbreviation %><br>
+    <%= f.text_field :abbreviation %>
+  </div>
+  <div class="field">
+    <%= f.label :seed %><br>
+    <%= f.number_field :seed %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

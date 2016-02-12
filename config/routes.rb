@@ -1,4 +1,11 @@
 Rails.application.routes.draw do
+  resources :team_instances
+  resources :teams
+  resources :game_picks
+  resources :random_picks
+  resources :suicide_picks
+  resources :user_entries
+  resources :users
   resources :quadrants
   resources :games
   resources :brackets

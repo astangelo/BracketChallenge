@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @team_instance.team_id %>
+</p>
+
+<p>
+  <strong>Bracket:</strong>
+  <%= @team_instance.bracket_id %>
+</p>
+
+<p>
+  <strong>Quadrant:</strong>
+  <%= @team_instance.quadrant_id %>
+</p>
+
+<p>
+  <strong>Abbreviation:</strong>
+  <%= @team_instance.abbreviation %>
+</p>
+
+<p>
+  <strong>Seed:</strong>
+  <%= @team_instance.seed %>
+</p>
+
+<%= link_to 'Edit', edit_team_instance_path(@team_instance) %> |
+<%= link_to 'Back', team_instances_path %>

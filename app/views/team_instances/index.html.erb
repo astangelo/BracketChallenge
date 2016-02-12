@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Team Instances</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Team</th>
+      <th>Bracket</th>
+      <th>Quadrant</th>
+      <th>Abbreviation</th>
+      <th>Seed</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @team_instances.each do |team_instance| %>
+      <tr>
+        <td><%= team_instance.team_id %></td>
+        <td><%= team_instance.bracket_id %></td>
+        <td><%= team_instance.quadrant_id %></td>
+        <td><%= team_instance.abbreviation %></td>
+        <td><%= team_instance.seed %></td>
+        <td><%= link_to 'Show', team_instance %></td>
+        <td><%= link_to 'Edit', edit_team_instance_path(team_instance) %></td>
+        <td><%= link_to 'Destroy', team_instance, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Team instance', new_team_instance_path %>

@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @user_entry.user_id %>
+</p>
+
+<p>
+  <strong>Challenge:</strong>
+  <%= @user_entry.challenge_id %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @user_entry.active %>
+</p>
+
+<%= link_to 'Edit', edit_user_entry_path(@user_entry) %> |
+<%= link_to 'Back', user_entries_path %>

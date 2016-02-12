@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User entry:</strong>
+  <%= @game_pick.user_entry_id %>
+</p>
+
+<p>
+  <strong>Team instance:</strong>
+  <%= @game_pick.team_instance_id %>
+</p>
+
+<p>
+  <strong>Round:</strong>
+  <%= @game_pick.round %>
+</p>
+
+<%= link_to 'Edit', edit_game_pick_path(@game_pick) %> |
+<%= link_to 'Back', game_picks_path %>
