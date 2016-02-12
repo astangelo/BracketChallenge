@@ -1,0 +1,29 @@
+<%= form_for(@quadrant) do |f| %>
+  <% if @quadrant.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@quadrant.errors.count, "error") %> prohibited this quadrant from being saved:</h2>
+
+      <ul>
+      <% @quadrant.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :bracket_id %><br>
+    <%= f.number_field :bracket_id %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :order %><br>
+    <%= f.number_field :order %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
