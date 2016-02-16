@@ -15,8 +15,8 @@
   <tbody>
     <% @user_entries.each do |user_entry| %>
       <tr>
-        <td><%= user_entry.user_id %></td>
-        <td><%= user_entry.challenge_id %></td>
+        <td><%= user_entry.user.first_name + " " + user_entry.user.last_name %></td>
+        <td><%= user_entry.challenge.year %></td>
         <td><%= user_entry.active %></td>
         <td><%= link_to 'Show', user_entry %></td>
         <td><%= link_to 'Edit', edit_user_entry_path(user_entry) %></td>

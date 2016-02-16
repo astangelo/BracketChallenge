@@ -12,16 +12,19 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :team_id %><br>
-    <%= f.number_field :team_id %>
+    <%= f.label :bracket_id %><br>
+    <!--%= f.number_field :bracket_id %-->
+    <%= f.collection_select :bracket_id, Bracket.all.collect, :id, :challenge_id, :prompt => "Select a bracket" %>
+
   </div>
   <div class="field">
-    <%= f.label :bracket_id %><br>
-    <%= f.number_field :bracket_id %>
+    <%= f.label :team_id %><br>
+    <%= f.collection_select :team_id, Team.all.collect, :id, :name, :prompt => "Select a team" %>
   </div>
   <div class="field">
     <%= f.label :quadrant_id %><br>
     <%= f.number_field :quadrant_id %>
+</div>
   </div>
   <div class="field">
     <%= f.label :abbreviation %><br>

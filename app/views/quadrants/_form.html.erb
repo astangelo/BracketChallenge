@@ -14,7 +14,11 @@
   <div class="field">
     <%= f.label :bracket_id %><br>
     <%= f.number_field :bracket_id %>
+    <%= f.select :bracket_id, Bracket.find_all_by_id(f.bracket).collect {|x| [x.year.challenge.year, x.id]}, {:prompt => "Select an event"}, {:id => "sltEvents"} %>
+
   </div>
+<%= f.select :event_id, Event.find_all_by_id(current_user.event_ids).collect {|x| [x.event_name, x.id]}, {:prompt => "Select an event"}, {:id => "sltEvents"} %>
+
   <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>

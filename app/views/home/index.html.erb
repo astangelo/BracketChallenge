@@ -1,0 +1,66 @@
+<h1>Hello World</h1>
+
+<style>
+.holder {
+	margin: 2em;
+}
+.game_holder {
+	display: block;
+	width: 100px;
+	z-index: 10;
+	position: relative;
+}
+.game_holder:last-child {
+	margin-top: 3.5em;
+}
+.game_holder:hover {
+	overflow:visible;
+}
+.game_holder .team {
+	border-radius: 10px 10px 0 0;
+	background-color: #AAAAAA;
+	padding-left: 1em;
+	border:1px solid #888;
+	border-collapse: collapse;
+	height: 1.75em;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.game_holder .team:last-child {
+	border-radius: 0 0 10px 10px;
+	top: -1px;
+}
+.game_holder .team:hover {
+	background-color: #CCCCCC;
+	overflow: visible;
+}
+.bracket-lines {
+	border-top: 2px solid #000000;
+	border-bottom: 2px solid #000000;
+	border-right: 2px solid #000000;
+	border-left: 0px;
+	border-radius: 0 5px 5px 0;
+	display: block;
+	position: absolute;
+	height: 7.2em;
+	width: 100px;
+	//top:-.75em;
+	z-index: 9;
+	margin-top: -1.85em;
+    margin-left: 75px;
+}
+
+</style>
+<div class="holder">
+	<div class="two_game_holder">
+	  <div class="game_holder">
+	    <div class="team">Purdue</div>
+	    <div class="team">Duke lkj lkjkj dde lkjlk lkjlkjl</div>
+	  </div>
+	  <div class="bracket-lines"></div>
+	  <div class="game_holder">
+	    <div class="team">Purdue</div>
+	    <div class="team">Duke lkj lkjkj dde lkjlk lkjlkjl</div>
+	  </div>
+	</div>
+</div>
