@@ -17,3 +17,32 @@
 // "bootstrap-sprockets" must be imported before "bootstrap" and "bootstrap/variables"
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.but {
+    color: #fff;
+    background-color: #337ab7;
+    border: 1px solid #2e6da4;
+    padding: 1em 2em;
+    float: inherit !important;
+    display: block !important;
+    position: relative;
+}
+
+.but:hover, .but:checked {
+	color: #fff;
+    background-color: #286090;
+    border-color: #204d74;	
+}
+
+
+.but input {
+    position: absolute;
+    clip: rect(0,0,0,0);
+    pointer-events: none;
+}
+
+
+
+/*-------------------*/
+
+
