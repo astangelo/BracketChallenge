@@ -2,59 +2,63 @@
 
 <style>
 .bracket {
-	margin: 2em;
+	margin: 1.6em;
 	position: relative;
 }
 .round {
-	//margin: 2em;
+	//margin: 1.6em;
 	display: block;
 	position: relative;
 	float:left;
 }
 .round1 {}
 .round2 {
-	padding: 0  0 50px 50px;
-	margin-top: 3.5em;
+	padding: 0  0 40px 40px;
+	margin-top: 2.1em;
+}
+.round3 {
+	padding: 0  0 40px 40px;
+	margin-top: 6.5em;
 }
 .two_game_holder {
 	padding-top: 0;
-	margin-top: 3em;
+	margin-top: 2.4em;
 }
 .two_game_holder:first-child {
 	margin-top: 0;
 }
 .game_holder {
 	display: block;
-	width: 100px;
+	width: 80px;
 	z-index: 10;
 	position: relative;
     box-sizing: border-box;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px;
+    font-size: 11.2px;
     line-height: 1.42857143;
     color: #333333;
 }
 .two_game_holder .game_holder:last-child {
-	margin-top: 3.5em;
+	margin-top: 2.8em;
 }
 .round2 .game_holder:last-child {
-	margin-top: 10em;
+	margin-top: 8.6em;
 }
 .game_holder:hover {
 	overflow:visible;
 }
 .game_holder .team {
-	border-radius: 10px 10px 0 0;
+	border-radius: 8px 8px 0 0;
 	background-color: #AAAAAA;
 	padding-left: 1em;
 	border:1px solid #888;
 	border-collapse: collapse;
-	height: 1.75em;
+	height: 1.4em;
 	overflow: hidden;
 	white-space: nowrap;
 }
 .game_holder .team:last-child {
-	border-radius: 0 0 10px 10px;
+	border-radius: 0 0 8px 8px;
 	top: -1px;
 }
 .game_holder .team:hover {
@@ -87,17 +91,17 @@
 
 
 .game_holder .lbl_team {
-	border-radius: 10px 10px 0 0 !important; 
+	border-radius: 8px 8px 0 0 !important; 
 	background-color: #AAAAAA;
 	padding-left: 1em !important;
 	border:1px solid #888;
 	border-collapse: collapse !important;
-	height: 1.75em !important;
+	height: 1.4em !important;
 	overflow: hidden;
 	white-space: nowrap !important;
 	float: inherit !important;
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    font-size: 14px !important;
+    font-size: 11.2px !important;
     line-height: 1.42857143 !important;
     color: #333333;
     position:static !important;
@@ -106,7 +110,7 @@
 
     background-origin: padding-box;
     padding-bottom: 0px;
-    padding-left: 14px !important;
+    padding-left: 11.2px !important;
     padding-right: 0px;
     padding-top: 0px;
 
@@ -120,7 +124,7 @@ border-bottom-width:1px;
 border-collapse:collapse;
 border-image-outset: 0px;
 border-image-repeat: stretch;
-border-image-slice: 100;%
+border-image-slice: 100%;
 border-image-source: none;
 border-image-width: 1;
 border-left-color: rgb(136, 136, 136);
@@ -130,26 +134,26 @@ border-right-color: rgb(136, 136, 136);
 border-right-style: solid;
 border-right-width: 1px;
 border-top-color: rgb(136, 136, 136);
-border-top-left-radius: 10px;
-border-top-right-radius: 10px;
+border-top-left-radius: 8px;
+border-top-right-radius: 8px;
 border-top-style: solid;
 border-top-width: 1px;
 box-sizing: border-box;
 color: rgb(51, 51, 51);
 display: block;
 font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-font-size: 14px;
-height: 24.5px;
-line-height: 20px;
+font-size: 11.2px;
+height: 19.6px;
+line-height: 16px;
 overflow-x: hidden;
 overflow-y: hidden;
-padding-left: 14px;
+padding-left: 11.2px;
 white-space: nowrap;
-width: 100px;
+width: 80px;
 }
 .game_holder .lbl_team:after, .game_holder .lbl_team:before, .game_holder:after, .game_holder:before {    box-sizing: border-box;}
 .game_holder .lbl_team:last-child {
-	border-radius: 0 0 10px 10px !important;
+	border-radius: 0 0 8px 8px !important;
 	top: -1px;
 }
 .game_holder .lbl_team:hover {
@@ -186,15 +190,18 @@ width: 100px;
 	border-bottom: 2px solid #000000;
 	border-right: 2px solid #000000;
 	border-left: 0px;
-	border-radius: 0 5px 5px 0;
+	border-radius: 0 4px 4px 0;
 	display: block;
 	position: absolute;
-	height: 7.2em;
-	width: 100px;
+	height: 4.6em;
+	width: 80px;
 	//top:-.75em;
 	z-index: 9;
-	margin-top: -1.85em;
-    margin-left: 75px;
+	margin-top: -1.2em;
+    margin-left: 60px;
+}
+.round2 .bracket-lines{
+	height: 9.3em;
 }
 
 </style>
@@ -239,44 +246,44 @@ width: 100px;
 </div>
 
 <hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
-
+<form action="#" method="GET">
 <div class="bracket" style="clear: both;">
 	<div class="round round1">
 		<div class="two_game_holder">
 		  <div class="btn-group game_holder" data-toggle="buttons">
 		  	<label class="btn btn-primary lbl_team">
-		  		<input type="radio" name="opts" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		<input type="radio" name="game1" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
 	  		<label class="btn btn-primary lbl_team">
-	  			<input type="radio" name="opts" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+	  			<input type="radio" name="game1" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		  <div class="bracket-lines"></div>
 		  <div class="btn-group game_holder" data-toggle="buttons">
 		  	<label class="btn btn-primary lbl_team">
-		  		<input type="radio" name="opts" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		<input type="radio" name="game2" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
 	  		<label class="btn btn-primary lbl_team">
-	  			<input type="radio" name="opts" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+	  			<input type="radio" name="game2" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		</div>
 		<div class="two_game_holder">
 		  <div class="btn-group game_holder" data-toggle="buttons">
 		  	<label class="btn btn-primary lbl_team">
-		  		<input type="radio" name="opts" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		<input type="radio" name="game3" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
 	  		<label class="btn btn-primary lbl_team">
-	  			<input type="radio" name="opts" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+	  			<input type="radio" name="game3" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		  <div class="bracket-lines"></div>
 		  <div class="btn-group game_holder" data-toggle="buttons">
 		  	<label class="btn btn-primary lbl_team">
-		  		<input type="radio" name="opts" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		<input type="radio" name="game4" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
 	  		<label class="btn btn-primary lbl_team">
-	  			<input type="radio" name="opts" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+	  			<input type="radio" name="game4" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		</div>
@@ -285,41 +292,34 @@ width: 100px;
 		<div class="two_game_holder">
 		  <div class="btn-group game_holder" data-toggle="buttons">
 		  	<label class="btn btn-primary lbl_team">
-		  		<input type="radio" name="opts" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		<input type="radio" name="game5" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
 	  		<label class="btn btn-primary lbl_team">
-	  			<input type="radio" name="opts" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+	  			<input type="radio" name="game5" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
-
+		  <div class="bracket-lines"></div>
 		  <div class="btn-group game_holder" data-toggle="buttons">
 		  	<label class="btn btn-primary lbl_team">
-		  		<input type="radio" name="opts" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		<input type="radio" name="game6" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
 	  		<label class="btn btn-primary lbl_team">
-	  			<input type="radio" name="opts" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+	  			<input type="radio" name="game6" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		</div>
 	</div>
+	<div class="round round3">
+		<div class="btn-group game_holder" data-toggle="buttons">
+		  	<label class="btn btn-primary lbl_team">
+		  		<input type="radio" name="game7" id="option1" autocomplete="off" value="Purdue">Purdue
+	  		</label>
+	  		<label class="btn btn-primary lbl_team">
+	  			<input type="radio" name="game7" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+	  		</label>
+  		</div>
+	</div>	
 </div>
-
+<input type="submit" value="Submit">
+</form>
 <hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
-
-<div class="btn-group" data-toggle="buttons">
-  <label class="btn btn-primary but">
-    <input type="radio" name="tests" id="option1" autocomplete="off"> Radio 1
-  </label>
-  <label class="btn btn-primary but">
-    <input type="radio" name="tests" id="option2" autocomplete="off"> Radio 2
-  </label>
-  <label class="btn btn-primary but">
-    <input type="radio" name="tests" id="option3" autocomplete="off"> Radio 3
-  </label>
-</div>
-
-<div class="btn-group" data-toggle="buttons">
-<label class="btn btn-primary active"><input type="radio" name="options" id="option1" autocomplete="off" checked="checked"> Radio 1 (preselected) </label>
-<label class="btn but"><input type="radio" name="options" id="option2" autocomplete="off"> Radio 2 </label>
-<label class="btn btn-primary"> <input type="radio" name="options" id="option3" autocomplete="off"> Radio 3 </label>
-</div>
