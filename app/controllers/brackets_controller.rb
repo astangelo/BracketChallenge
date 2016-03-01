@@ -1,5 +1,5 @@
 class BracketsController < ApplicationController
-  before_action :set_bracket, only: [:show, :edit, :update, :destroy]
+  before_action :set_bracket, only: [:show, :edit, :update, :destroy, :testVar]
 
   # GET /brackets
   # GET /brackets.json

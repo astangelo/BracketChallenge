@@ -4,6 +4,7 @@
 .bracket {
 	margin: 1.6em;
 	position: relative;
+	font-size:14px;
 }
 .round {
 	//margin: 1.6em;
@@ -38,11 +39,18 @@
     line-height: 1.42857143;
     color: #333333;
 }
+.game_holder:nth-child(4n) {
+	//border:2px solid #F00;
+	margin-top:2.4em;
+}
 .two_game_holder .game_holder:last-child {
 	margin-top: 2.8em;
 }
+.game_holder:nth-child(3n) {
+	margin-top: 2.8em;
+}
 .round2 .game_holder:last-child {
-	margin-top: 8.6em;
+	margin-top: 8.2em;
 }
 .game_holder:hover {
 	overflow:visible;
@@ -201,88 +209,66 @@ width: 80px;
     margin-left: 60px;
 }
 .round2 .bracket-lines{
-	height: 9.3em;
+	height: 9.0em;
 }
 
 </style>
-<div class="bracket">
-	<div class="round round1">
-		<div class="two_game_holder">
-		  <div class="game_holder">
-		    <div class="team">Purdue</div>
-		    <div class="team">Duke lkj lkjkj dde lkjlk lkjlkjl</div>
-		  </div>
-		  <div class="bracket-lines"></div>
-		  <div class="game_holder">
-		    <div class="team">Purdue</div>
-		    <div class="team">Duke lkj lkjkj dde lkjlk lkjlkjl</div>
-		  </div>
-		</div>
-		<div class="two_game_holder">
-		  <div class="game_holder">
-		    <div class="team">Purdue</div>
-		    <div class="team">Duke</div>
-		  </div>
-		  <div class="bracket-lines"></div>
-		  <div class="game_holder">
-		    <div class="team">IUPUI</div>
-		    <div class="team">University of Southern Indiana</div>
-		  </div>
-		</div>
-	</div>
-	<div class="round round2">
-		<div class="two_game_holder">
-		  <div class="game_holder">
-		    <div class="team">Purdue</div>
-		    <div class="team">Duke lkj lkjkj dde lkjlk lkjlkjl</div>
-		  </div>
 
-		  <div class="game_holder">
-		    <div class="team">Purdue</div>
-		    <div class="team">Duke lkj lkjkj dde lkjlk lkjlkjl</div>
-		  </div>
-		</div>
-	</div>
-</div>
 
 <hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
 <form action="#" method="GET">
-<div class="bracket" style="clear: both;">
+<div class="bracket" style="clear: both;" data-bind="with: bModel">
+<!-- ko foreach: rounds.slice(0).reverse() -->
+  <div class="round" data-bind="css: roundClass, foreach: games">
+  	  <!-- ko if: ($index()%2 == 1)-->
+	  <div class="bracket-lines"></div>
+	  <!-- /ko -->
+		  <div class="bzn-group game_holder" data-toggle="buttons">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: awayTeam, click: function(){$data.winner($data.awayTeam())}">
+	  		</label>
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: homeTeam, click: function(){$data.winner($data.homeTeam())}">
+	  		</label>
+  		  </div>
+
+  </div>
+
+<!-- /ko -->
+<!-- fko foreach: games -->
 	<div class="round round1">
 		<div class="two_game_holder">
-		  <div class="btn-group game_holder" data-toggle="buttons">
-		  	<label class="btn btn-primary lbl_team">
-		  		<input type="radio" name="game1" id="option1" autocomplete="off" value="Purdue">Purdue
+		  <div class="bzn-group game_holder" data-toggle="buttons" data-bind="with:games[0]">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: awayTeam, click: setWinner2">
+		  		<input type="radio" name="game1" id="option1" autocomplete="off" value="Purdue" >Purdue
 	  		</label>
-	  		<label class="btn btn-primary lbl_team">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: homeTeam, click: setWinner2">
 	  			<input type="radio" name="game1" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		  <div class="bracket-lines"></div>
-		  <div class="btn-group game_holder" data-toggle="buttons">
-		  	<label class="btn btn-primary lbl_team">
+		  <div class="bzn-group game_holder" data-toggle="buttons">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].awayTeam, click: setWinner(games[1], games[1].awayTeam())">
 		  		<input type="radio" name="game2" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
-	  		<label class="btn btn-primary lbl_team">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].homeTeam, click: setWinner(games[1], games[1].homeTeam())">
 	  			<input type="radio" name="game2" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		</div>
 		<div class="two_game_holder">
-		  <div class="btn-group game_holder" data-toggle="buttons">
-		  	<label class="btn btn-primary lbl_team">
+		  <div class="bzn-group game_holder" data-toggle="buttons">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().awayTeam">
 		  		<input type="radio" name="game3" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
-	  		<label class="btn btn-primary lbl_team">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().homeTeam">
 	  			<input type="radio" name="game3" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		  <div class="bracket-lines"></div>
-		  <div class="btn-group game_holder" data-toggle="buttons">
-		  	<label class="btn btn-primary lbl_team">
+		  <div class="bzn-group game_holder" data-toggle="buttons">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().awayTeam">
 		  		<input type="radio" name="game4" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
-	  		<label class="btn btn-primary lbl_team">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().homeTeam">
 	  			<input type="radio" name="game4" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
@@ -290,36 +276,41 @@ width: 80px;
 	</div>
 	<div class="round round2">
 		<div class="two_game_holder">
-		  <div class="btn-group game_holder" data-toggle="buttons">
-		  	<label class="btn btn-primary lbl_team">
+		  <div class="bzn-group game_holder" data-toggle="buttons">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().awayTeam">
 		  		<input type="radio" name="game5" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
-	  		<label class="btn btn-primary lbl_team">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().homeTeam">
 	  			<input type="radio" name="game5" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		  <div class="bracket-lines"></div>
-		  <div class="btn-group game_holder" data-toggle="buttons">
-		  	<label class="btn btn-primary lbl_team">
+		  <div class="bzn-group game_holder" data-toggle="buttons">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().awayTeam">
 		  		<input type="radio" name="game6" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
-	  		<label class="btn btn-primary lbl_team">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().homeTeam">
 	  			<input type="radio" name="game6" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		  </div>
 		</div>
 	</div>
 	<div class="round round3">
-		<div class="btn-group game_holder" data-toggle="buttons">
-		  	<label class="btn btn-primary lbl_team">
+		<div class="bzn-group game_holder" data-toggle="buttons">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().awayTeam">
 		  		<input type="radio" name="game7" id="option1" autocomplete="off" value="Purdue">Purdue
 	  		</label>
-	  		<label class="btn btn-primary lbl_team">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().homeTeam">
 	  			<input type="radio" name="game7" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 	  		</label>
   		</div>
 	</div>	
+<!-- /fko -->
 </div>
 <input type="submit" value="Submit">
 </form>
 <hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
+<%= link_to "Greeting", '#', onclick: "ommit(2); return false", class: "nav_link"
+ %>
+ <input type="text" id="txt_input" value="Hello World"></input>
+ <div id="linkStatus"></div>

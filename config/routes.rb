@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'test/testVar'
+
   resources :team_instances
   resources :teams
   resources :game_picks
@@ -12,6 +14,8 @@ Rails.application.routes.draw do
   resources :challenges
 
   root :to => 'home#index'
+
+  #match 'qqq', :to => 'brackets#testVar', via: [:get, :post]
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

@@ -6,4 +6,8 @@ class HomeController < ApplicationController
       format.html # index.html.erb
     end
   end
+
+
+
+  
 end

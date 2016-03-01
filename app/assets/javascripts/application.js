@@ -14,4 +14,6 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require turbolinks
+//= require knockout-3.4.0.debug
 //= require_tree .
+
