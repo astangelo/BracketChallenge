@@ -45,7 +45,7 @@ function bracketModel (){
 	self.tree().rightChild().rightChild().homeTeam('Wisconsin');
 	self.tree().rightChild().rightChild().awayTeam('Iowa');
 
-	self.games = [
+	/*self.games = [
 	  self.tree().rightChild().rightChild(),
 	  self.tree().rightChild().leftChild(),
 	  self.tree().leftChild().rightChild(),
@@ -53,13 +53,16 @@ function bracketModel (){
 	  self.tree().rightChild(),
 	  self.tree().leftChild(),
 	  self.tree()
-	];
+	];*/
+
+	self.games = ListGamesByDisplay2(self.tree(), []);
 
 	self.rounds = ko.observableArray([
 	  {games:[self.tree()], roundClass: 'round3'},
 	  {games:[self.tree().rightChild(), self.tree().leftChild()], roundClass:  'round2'},
 	  {games:[self.tree().rightChild().rightChild(), self.tree().rightChild().leftChild(), self.tree().leftChild().rightChild(), self.tree().leftChild().leftChild()], roundClass: 'round1'}
 	]);
+
 
 
 
@@ -118,6 +121,34 @@ function setWinner2(data, event)
 {
 	console.log(data, event);
 	//game.winner(winner);
+}
+
+function ListGamesByDisplay(games, list){
+	if (!(games.rightChild())) {
+	  list.push(games); 
+	  return; 
+	}
+	if (!(list)) {list = []}
+	var retList = [];
+	var val1, val2;
+	ListGamesByDisplay(games.rightChild(), list);
+	ListGamesByDisplay(games.leftChild(), list);
+	return list;
+}
+
+function ListGamesByDisplay2(games, list){
+	if (!(list)) {list = [[]];}
+	if (list.length <= games.level()) {list.push([])}
+	list[games.level()].push(games);
+	if (!(games.rightChild())) {
+	  return; 
+	}
+	ListGamesByDisplay2(games.rightChild(), list);
+	ListGamesByDisplay2(games.leftChild(), list);
+	x = []; 
+	y = list.slice(0).reverse();
+	for (j in y) {x = x.concat(y[j]);}
+	return x;
 }
 
 $('document').ready(function(){
