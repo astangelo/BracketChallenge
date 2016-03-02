@@ -36,14 +36,36 @@ function bracketModel (){
 	addChildGames(self.tree().leftChild());
 	addChildGames(self.tree().rightChild());
 
-	self.tree().leftChild().leftChild().homeTeam('Purdue');
+	addChildGames(self.tree().leftChild().leftChild());
+	addChildGames(self.tree().rightChild().leftChild());
+	addChildGames(self.tree().leftChild().rightChild());
+	addChildGames(self.tree().rightChild().rightChild());
+
+	/*self.tree().leftChild().leftChild().homeTeam('Purdue');
 	self.tree().leftChild().leftChild().awayTeam('Maryland');
 	self.tree().leftChild().rightChild().homeTeam('Indiana');
 	self.tree().leftChild().rightChild().awayTeam('Michigan');
 	self.tree().rightChild().leftChild().homeTeam('Michigan State');
 	self.tree().rightChild().leftChild().awayTeam('Ohio State');
 	self.tree().rightChild().rightChild().homeTeam('Wisconsin');
-	self.tree().rightChild().rightChild().awayTeam('Iowa');
+	self.tree().rightChild().rightChild().awayTeam('Iowa');*/
+
+	self.tree().leftChild().leftChild().leftChild().homeTeam('Purdue');
+	self.tree().leftChild().leftChild().leftChild().awayTeam('Maryland');
+	self.tree().leftChild().rightChild().leftChild().homeTeam('Indiana');
+	self.tree().leftChild().rightChild().leftChild().awayTeam('Michigan');
+	self.tree().rightChild().leftChild().leftChild().homeTeam('Michigan State');
+	self.tree().rightChild().leftChild().leftChild().awayTeam('Ohio State');
+	self.tree().rightChild().rightChild().leftChild().homeTeam('Wisconsin');
+	self.tree().rightChild().rightChild().leftChild().awayTeam('Iowa');
+	self.tree().leftChild().leftChild().rightChild().homeTeam('Northwestern');
+	self.tree().leftChild().leftChild().rightChild().awayTeam('Penn State');
+	self.tree().leftChild().rightChild().rightChild().homeTeam('Illinois');
+	self.tree().leftChild().rightChild().rightChild().awayTeam('Minnesota');
+	self.tree().rightChild().leftChild().rightChild().homeTeam('Nebraska');
+	self.tree().rightChild().leftChild().rightChild().awayTeam('Maryland');
+	self.tree().rightChild().rightChild().rightChild().homeTeam('Rutgers');
+	self.tree().rightChild().rightChild().rightChild().awayTeam('Iowa State');
 
 	/*self.games = [
 	  self.tree().rightChild().rightChild(),
@@ -58,9 +80,10 @@ function bracketModel (){
 	self.games = ListGamesByDisplay2(self.tree(), []);
 
 	self.rounds = ko.observableArray([
-	  {games:[self.tree()], roundClass: 'round3'},
-	  {games:[self.tree().rightChild(), self.tree().leftChild()], roundClass:  'round2'},
-	  {games:[self.tree().rightChild().rightChild(), self.tree().rightChild().leftChild(), self.tree().leftChild().rightChild(), self.tree().leftChild().leftChild()], roundClass: 'round1'}
+	  {games:[self.tree()], roundClass: 'round4'},
+	  {games:[self.tree().rightChild(), self.tree().leftChild()], roundClass:  'round3'},
+	  {games:[self.tree().rightChild().rightChild(), self.tree().rightChild().leftChild(), self.tree().leftChild().rightChild(), self.tree().leftChild().leftChild()], roundClass: 'round2'},
+	  {games:[self.tree().rightChild().rightChild().rightChild(), self.tree().rightChild().rightChild().leftChild(), self.tree().rightChild().leftChild().rightChild(), self.tree().rightChild().leftChild().leftChild(), self.tree().leftChild().rightChild().rightChild(), self.tree().leftChild().rightChild().leftChild(), self.tree().leftChild().leftChild().rightChild(), self.tree().leftChild().leftChild().leftChild()], roundClass: 'round1'}
 	]);
 
 

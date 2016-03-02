@@ -21,6 +21,10 @@
 	padding: 0  0 40px 40px;
 	margin-top: 6.5em;
 }
+.round4 {
+	padding: 0  0 40px 40px;
+	margin-top: 15.0em;
+}
 .eigth {
 	/*width:100px;*/
 	float:left;
@@ -47,7 +51,7 @@
     line-height: 1.42857143;
     color: #333333;
 }
-.game_holder:nth-child(4n) {
+.game_holder:nth-child(3n+4) {
 	//border:2px solid #F00;
 	margin-top:2.4em;
 }
@@ -57,8 +61,14 @@
 .game_holder:nth-child(3n) {
 	margin-top: 2.8em;
 }
-.round2 .game_holder:last-child {
+.round2 .game_holder:nth-child(3n) {
 	margin-top: 8.2em;
+}
+.round2 .game_holder:nth-child(4n) {
+	margin-top: 7.9em;
+}
+.round3 .game_holder:nth-child(3) {
+	margin-top: 19.5em;
 }
 .game_holder:hover {
 	overflow:visible;
@@ -218,6 +228,9 @@ width: 80px;
 }
 .round2 .bracket-lines{
 	height: 9.0em;
+}
+.round3 .bracket-lines {
+	height: 18em;
 }
 .quad>.bracket-lines {
 	height: 17.2em;
