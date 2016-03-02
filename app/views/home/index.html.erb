@@ -248,9 +248,9 @@ width: 80px;
 	  <div class="bracket-lines"></div>
 	  <!-- /ko -->
 		  <div class="bzn-group game_holder" data-toggle="buttons">
-		  	<label class="bzn bzn-primary lbl_team" data-bind="text: awayTeam, click: function(){$data.winner($data.awayTeam())}">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: awayTeam, css: {'active': ((awayTeam()||0)==$data.winner())}, click: function(){$data.winner($data.awayTeam())}">
 	  		</label>
-	  		<label class="bzn bzn-primary lbl_team" data-bind="text: homeTeam, click: function(){$data.winner($data.homeTeam())}">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: homeTeam, css: {'active': ((homeTeam()||0)==$data.winner())},  click: function(){$data.winner($data.homeTeam())}">
 	  		</label>
   		  </div>
 
