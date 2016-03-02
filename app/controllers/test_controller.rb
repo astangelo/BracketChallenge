@@ -17,4 +17,30 @@ class TestController < ApplicationController
     #=end                
 
   end
+
+  def getTeamList
+    #teams = {'resp' => params["vars"]}.to_json
+    teams = {teams:[
+		  'Purdue',
+		  'Maryland',
+		  'Indiana',
+		  'Michigan',
+		  'Michigan State',
+		  'Ohio State',
+		  'Wisconsin',
+		  'Iowa',
+		  'Northwestern',
+		  'Penn State',
+		  'Illinois',
+		  'Minnesota',
+		  'Nebraska',
+		  'Maryland',
+		  'Rutgers',
+		  'Missouri'
+		]}.to_json
+
+	render :json => teams
+
+  end
+
 end

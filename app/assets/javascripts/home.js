@@ -28,7 +28,7 @@ function ommit(id)
 }
 var bModel;
 
-function bracketModel (){
+function bracketModel (teams){
 	var self = this;
 
 	self.tree = ko.observable(new game());
@@ -50,7 +50,29 @@ function bracketModel (){
 	self.tree().rightChild().rightChild().homeTeam('Wisconsin');
 	self.tree().rightChild().rightChild().awayTeam('Iowa');*/
 
-	self.tree().leftChild().leftChild().leftChild().homeTeam('Purdue');
+    if(teams) {self.teams = teams;}
+    else {
+		self.teams = [
+		  'Purdue',
+		  'Maryland',
+		  'Indiana',
+		  'Michigan',
+		  'Michigan State',
+		  'Ohio State',
+		  'Wisconsin',
+		  'Iowa',
+		  'Northwestern',
+		  'Penn State',
+		  'Illinois',
+		  'Minnesota',
+		  'Nebraska',
+		  'Maryland',
+		  'Rutgers',
+		  'Iowa State'
+		];
+	}
+
+	/*self.tree().leftChild().leftChild().leftChild().homeTeam('Purdue');
 	self.tree().leftChild().leftChild().leftChild().awayTeam('Maryland');
 	self.tree().leftChild().rightChild().leftChild().homeTeam('Indiana');
 	self.tree().leftChild().rightChild().leftChild().awayTeam('Michigan');
@@ -65,7 +87,8 @@ function bracketModel (){
 	self.tree().rightChild().leftChild().rightChild().homeTeam('Nebraska');
 	self.tree().rightChild().leftChild().rightChild().awayTeam('Maryland');
 	self.tree().rightChild().rightChild().rightChild().homeTeam('Rutgers');
-	self.tree().rightChild().rightChild().rightChild().awayTeam('Iowa State');
+	self.tree().rightChild().rightChild().rightChild().awayTeam('Iowa State');*/
+
 
 	/*self.games = [
 	  self.tree().rightChild().rightChild(),
@@ -75,9 +98,7 @@ function bracketModel (){
 	  self.tree().rightChild(),
 	  self.tree().leftChild(),
 	  self.tree()
-	];*/
-
-	self.games = ListGamesByDisplay2(self.tree(), []);
+	];
 
 	self.rounds2 = ko.observableArray([
 	  {games:[self.tree()], roundClass: 'round4'},
@@ -85,6 +106,10 @@ function bracketModel (){
 	  {games:[self.tree().rightChild().rightChild(), self.tree().rightChild().leftChild(), self.tree().leftChild().rightChild(), self.tree().leftChild().leftChild()], roundClass: 'round2'},
 	  {games:[self.tree().rightChild().rightChild().rightChild(), self.tree().rightChild().rightChild().leftChild(), self.tree().rightChild().leftChild().rightChild(), self.tree().rightChild().leftChild().leftChild(), self.tree().leftChild().rightChild().rightChild(), self.tree().leftChild().rightChild().leftChild(), self.tree().leftChild().leftChild().rightChild(), self.tree().leftChild().leftChild().leftChild()], roundClass: 'round1'}
 	]);
+	*/
+
+
+	self.games = ListGamesByDisplay2(self.tree(), []);
 
 	self.rounds = ko.observableArray([
 	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round4'},
@@ -93,7 +118,7 @@ function bracketModel (){
 	  {games: $.grep(self.games, function(e,i){return (e.level() == 3);}), roundClass: 'round1'}
 	]);
 
-
+	seedTeamsInArray(self.teams, self.rounds()[3].games);
 
 }
 
@@ -179,7 +204,52 @@ function ListGamesByDisplay2(games, list){
 	return x;
 }
 
+function seedTeamsInArray (teams, bRow) {
+    var x = 3;
+	for (g in bRow)
+	{
+	  if(g<(teams.length / 2))
+	  {
+	    var t = g*2;
+	    bRow[g].homeTeam(teams[t]);
+	    if(++t<teams.length)
+	    {
+	      bRow[g].awayTeam(teams[t]);
+	    }
+
+	  }
+	}
+}
+
+function getTeams()
+{
+  $.ajax({
+    url:"/test/getTeamList",
+    dataType: "json",
+    type: 'GET'}).done(function (data,status,jqXHR)
+    {
+      $('#linkStatus').text("Yata!!");
+      console.log('-------------');
+      console.log(data);
+      console.log('-------------');
+      //return data.teams;
+      bModel = new bracketModel(data.teams);
+      ko.applyBindings(bModel);
+    }).fail(function (jqXHR,status,error)
+    {
+      $('#linkStatus').text("Danger, Will Robinson");
+      console.log('-------------');
+      console.log(jqXHR);
+      console.log("Status: "+status);
+      console.log("Error: "+error);
+      console.log('-------------');
+      //return [];
+      bModel = new bracketModel([]);
+      ko.applyBindings(bModel);
+    });
+}
+
 $('document').ready(function(){
-    bModel = new bracketModel();
-    ko.applyBindings(bModel);
+    //getTeams() implements an AJAX call. Bindings are applied as part of response.
+    data = getTeams();
 });
