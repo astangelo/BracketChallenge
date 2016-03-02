@@ -118,11 +118,11 @@ function game (home, away){
 		{
 			self.parent().winner(undefined);
 			if (self.direction == 'left') {
-				self.parent().awayTeam(newVal);
+				self.parent().homeTeam(newVal);
 			}
 			else
 			{
-				self.parent().homeTeam(newVal);
+				self.parent().awayTeam(newVal);
 			}
 		}
 	});
