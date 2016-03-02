@@ -41,75 +41,16 @@ function bracketModel (teams){
 	addChildGames(self.tree().leftChild().rightChild());
 	addChildGames(self.tree().rightChild().rightChild());
 
-	/*self.tree().leftChild().leftChild().homeTeam('Purdue');
-	self.tree().leftChild().leftChild().awayTeam('Maryland');
-	self.tree().leftChild().rightChild().homeTeam('Indiana');
-	self.tree().leftChild().rightChild().awayTeam('Michigan');
-	self.tree().rightChild().leftChild().homeTeam('Michigan State');
-	self.tree().rightChild().leftChild().awayTeam('Ohio State');
-	self.tree().rightChild().rightChild().homeTeam('Wisconsin');
-	self.tree().rightChild().rightChild().awayTeam('Iowa');*/
 
     if(teams) {self.teams = teams;}
     else {
-		self.teams = [
-		  'Purdue',
-		  'Maryland',
-		  'Indiana',
-		  'Michigan',
-		  'Michigan State',
-		  'Ohio State',
-		  'Wisconsin',
-		  'Iowa',
-		  'Northwestern',
-		  'Penn State',
-		  'Illinois',
-		  'Minnesota',
-		  'Nebraska',
-		  'Maryland',
-		  'Rutgers',
-		  'Iowa State'
-		];
-	}
+      $modal = $('#myModal');
+      $modal.find('.modal-body').text('There was an error with loading the data.  Please try refreshing.\n\nIf that doesn\'t work... blame Commissioner Yuval.');
+      $modal.find('.modal-header').text('Shoot and a Miss!!');
+      $modal.modal('show');
+   	}
 
-	/*self.tree().leftChild().leftChild().leftChild().homeTeam('Purdue');
-	self.tree().leftChild().leftChild().leftChild().awayTeam('Maryland');
-	self.tree().leftChild().rightChild().leftChild().homeTeam('Indiana');
-	self.tree().leftChild().rightChild().leftChild().awayTeam('Michigan');
-	self.tree().rightChild().leftChild().leftChild().homeTeam('Michigan State');
-	self.tree().rightChild().leftChild().leftChild().awayTeam('Ohio State');
-	self.tree().rightChild().rightChild().leftChild().homeTeam('Wisconsin');
-	self.tree().rightChild().rightChild().leftChild().awayTeam('Iowa');
-	self.tree().leftChild().leftChild().rightChild().homeTeam('Northwestern');
-	self.tree().leftChild().leftChild().rightChild().awayTeam('Penn State');
-	self.tree().leftChild().rightChild().rightChild().homeTeam('Illinois');
-	self.tree().leftChild().rightChild().rightChild().awayTeam('Minnesota');
-	self.tree().rightChild().leftChild().rightChild().homeTeam('Nebraska');
-	self.tree().rightChild().leftChild().rightChild().awayTeam('Maryland');
-	self.tree().rightChild().rightChild().rightChild().homeTeam('Rutgers');
-	self.tree().rightChild().rightChild().rightChild().awayTeam('Iowa State');*/
-
-
-	/*self.games = [
-	  self.tree().rightChild().rightChild(),
-	  self.tree().rightChild().leftChild(),
-	  self.tree().leftChild().rightChild(),
-	  self.tree().leftChild().leftChild(),
-	  self.tree().rightChild(),
-	  self.tree().leftChild(),
-	  self.tree()
-	];
-
-	self.rounds2 = ko.observableArray([
-	  {games:[self.tree()], roundClass: 'round4'},
-	  {games:[self.tree().rightChild(), self.tree().leftChild()], roundClass:  'round3'},
-	  {games:[self.tree().rightChild().rightChild(), self.tree().rightChild().leftChild(), self.tree().leftChild().rightChild(), self.tree().leftChild().leftChild()], roundClass: 'round2'},
-	  {games:[self.tree().rightChild().rightChild().rightChild(), self.tree().rightChild().rightChild().leftChild(), self.tree().rightChild().leftChild().rightChild(), self.tree().rightChild().leftChild().leftChild(), self.tree().leftChild().rightChild().rightChild(), self.tree().leftChild().rightChild().leftChild(), self.tree().leftChild().leftChild().rightChild(), self.tree().leftChild().leftChild().leftChild()], roundClass: 'round1'}
-	]);
-	*/
-
-
-	self.games = ListGamesByDisplay2(self.tree(), []);
+	self.games = ListGamesByDisplay(self.tree(), []);
 
 	self.rounds = ko.observableArray([
 	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round4'},
@@ -177,27 +118,14 @@ function setWinner2(data, event)
 }
 
 function ListGamesByDisplay(games, list){
-	if (!(games.rightChild())) {
-	  list.push(games); 
-	  return; 
-	}
-	if (!(list)) {list = []}
-	var retList = [];
-	var val1, val2;
-	ListGamesByDisplay(games.rightChild(), list);
-	ListGamesByDisplay(games.leftChild(), list);
-	return list;
-}
-
-function ListGamesByDisplay2(games, list){
 	if (!(list)) {list = [[]];}
 	if (list.length <= games.level()) {list.push([])}
 	list[games.level()].push(games);
 	if (!(games.rightChild())) {
 	  return; 
 	}
-	ListGamesByDisplay2(games.rightChild(), list);
-	ListGamesByDisplay2(games.leftChild(), list);
+	ListGamesByDisplay(games.rightChild(), list);
+	ListGamesByDisplay(games.leftChild(), list);
 	x = []; 
 	y = list.slice(0).reverse();
 	for (j in y) {x = x.concat(y[j]);}
