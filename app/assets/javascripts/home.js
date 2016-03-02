@@ -79,14 +79,19 @@ function bracketModel (){
 
 	self.games = ListGamesByDisplay2(self.tree(), []);
 
-	self.rounds = ko.observableArray([
+	self.rounds2 = ko.observableArray([
 	  {games:[self.tree()], roundClass: 'round4'},
 	  {games:[self.tree().rightChild(), self.tree().leftChild()], roundClass:  'round3'},
 	  {games:[self.tree().rightChild().rightChild(), self.tree().rightChild().leftChild(), self.tree().leftChild().rightChild(), self.tree().leftChild().leftChild()], roundClass: 'round2'},
 	  {games:[self.tree().rightChild().rightChild().rightChild(), self.tree().rightChild().rightChild().leftChild(), self.tree().rightChild().leftChild().rightChild(), self.tree().rightChild().leftChild().leftChild(), self.tree().leftChild().rightChild().rightChild(), self.tree().leftChild().rightChild().leftChild(), self.tree().leftChild().leftChild().rightChild(), self.tree().leftChild().leftChild().leftChild()], roundClass: 'round1'}
 	]);
 
-
+	self.rounds = ko.observableArray([
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round4'},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 1);}), roundClass: 'round3'},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 2);}), roundClass: 'round2'},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 3);}), roundClass: 'round1'}
+	]);
 
 
 
