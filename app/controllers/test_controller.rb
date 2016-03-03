@@ -1,5 +1,4 @@
 class TestController < ApplicationController
-  @teamWins = {}
   def testVar
     #puts "works\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\nworks\n"
     output = {'resp' => params["vars"]}.to_json
@@ -46,7 +45,7 @@ class TestController < ApplicationController
 
   def saveTeamPicks
   	byebug
-  	@teamWins = params["teams"]
+  	picks = params["teams"]
   	head :no_content
   end
 
