@@ -61,6 +61,18 @@ function bracketModel (teams){
 
 	seedTeamsInArray(self.teams, self.rounds()[3].games);
 
+	self.savePicks = function(){savePicks(self);};
+
+	self.tallyWins = ko.computed(function() {
+		var teamWins = {};
+		for (t in self.teams)
+		{
+			var count = $.grep(self.games, function(e,i){ return (e.winner() == self.teams[t]); }).length;
+			teamWins[""+self.teams[t]] = count;
+		}
+		return teamWins;
+	});
+
 }
 
 //prototype of the game obj
@@ -73,7 +85,6 @@ function game (home, away){
 	self.rightChild = ko.observable();
 	self.winner = ko.observable();
 	self.direction;
-	//self.levelSet = ko.observable(0);
 	self.level = ko.computed(function(){
 	  return ((self.parent && self.parent()) ? self.parent().level()+1 : 0);
 	});
@@ -144,9 +155,25 @@ function seedTeamsInArray (teams, bRow) {
 	    {
 	      bRow[g].awayTeam(teams[t]);
 	    }
-
 	  }
 	}
+}
+
+function savePicks(bMod){
+  console.log("data", {teams:bMod.tallyWins()});
+  $.ajax({
+    url:"/test/saveTeamPicks",
+    dataType: "json",
+    data: {teams:bMod.tallyWins()},
+    type: 'POST'}).fail(function (jqXHR,status,error)
+    {
+      $('#linkStatus').text("Danger, Will Robinson");
+      console.log('-------------');
+      console.log(jqXHR);
+      console.log("Status: "+status);
+      console.log("Error: "+error);
+      console.log('-------------');
+    });
 }
 
 function getTeams()

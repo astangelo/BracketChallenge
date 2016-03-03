@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get 'test/testVar'
   get 'test/getTeamList'
+  post 'test/saveTeamPicks'
 
   resources :team_instances
   resources :teams
