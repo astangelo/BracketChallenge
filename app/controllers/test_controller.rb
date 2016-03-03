@@ -44,9 +44,10 @@ class TestController < ApplicationController
   end
 
   def saveTeamPicks
-  	byebug
+  	#byebug
   	picks = params["teams"]
-  	head :no_content
+  	render :json => {}
+  	#head :no_content
   end
 
 end
