@@ -286,6 +286,7 @@ function QModal() {
 			}
 			else {self.headerText(headerTxt);}
 		}
+		else {self.headerText('Alert!')}
 		if(className) {self.status(className);}
 		self.pop();		
 	}
