@@ -109,6 +109,18 @@ function game (home, away){
 			}
 		}
 	});
+	self.winsAbove = ko.computed(function(){
+		//set var
+		var wins = 0;
+
+		//check self winner (var+1)
+		if(self.winner()){ wins++; }
+		
+		//if(self.parent) var+self.parent.winsAbove()
+		if(self.parent()) {wins += self.parent().winsAbove();}
+
+		return wins;
+	});
 }
 
 function Team (team)
