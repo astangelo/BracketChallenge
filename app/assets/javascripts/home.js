@@ -26,10 +26,12 @@ function ommit(id)
     }
   });
 }
-var bModel;
+var bModel, qModal;
 
 function bracketModel (data){
 	var self = this;
+
+	self.qModal = ko.observable(new QModal());
 
 	self.tree = ko.observable(new game());
 	addChildGames(self.tree());
@@ -50,10 +52,7 @@ function bracketModel (data){
 
     if(data.teams) {self.teams = data.teams;}
     else {
-      $modal = $('#myModal');
-      $modal.find('.modal-body').text('There was an error with loading the data.  Please try refreshing.\n\nIf that doesn\'t work... blame Commissioner Yuval.');
-      $modal.find('.modal-header').text('Shoot and a Miss!!');
-      $modal.modal('show');
+    	self.qModal().show('There was an error with loading the data.  Please try refreshing.\n\nIf that doesn\'t work... blame Commissioner Yuval.','randomError','warning');
    	}
 
 	self.games = ListGamesByDisplay(self.tree(), []);
@@ -262,6 +261,34 @@ function getTeams()
       bModel = new bracketModel({teams:[]});
       ko.applyBindings(bModel);
     });
+}
+
+function QModal() {
+	var self = this;
+	self.modal = $('#myModal');
+	self.modal.on('hidden.bs.modal', function (e) { self.default(); });
+	self.pop = function(){self.modal.modal('show');}
+	self.default = function(){self.headerText('Alert'); self.message('&#9834;&#9836;One shining momemnt...&#9836;&#9835;'); self.status('');}
+	self.statusOpts = ['warning'];
+	self.status = ko.observable('');
+	self.message = ko.observable();
+	self.headerText = ko.observable();
+	self.randomWarningHeaders = ["Shoot... and a miss", "Aaaaaiiirbaaall... Aaaaaiiirbaaall!", "Brick!"];
+	self.show = function(msg, headerTxt, className)
+	{
+		self.message(msg);
+		if((headerTxt) && (headerTxt.length > 0)) {
+			if (headerTxt == "randomError")
+			{
+				var len = self.randomWarningHeaders.length * .999;
+				var rand = ~~(Math.random()*len);
+				self.headerText(self.randomWarningHeaders[rand]);
+			}
+			else {self.headerText(headerTxt);}
+		}
+		if(className) {self.status(className);}
+		self.pop();		
+	}
 }
 
 $('document').ready(function(){

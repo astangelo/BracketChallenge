@@ -45,4 +45,27 @@
 
 /*-------------------*/
 
+$warningDark: #722;
+$warningEmphasis: #D99;
+$warningBackground: #FDD;
 
+.modal-header {text-shadow: 2px 2px rgba(153, 153, 153, 0.58);}
+
+.modal.warning {
+	.modal-content {
+		background-color: $warningBackground;
+		border-color: $warningEmphasis;
+	}
+	.modal-header 
+	{
+		border-bottom-color: $warningEmphasis;
+	}
+	.modal-footer {
+		border-top-color: $warningBackground;
+		.btn {
+			background-color:$warningEmphasis;
+			color:backgroundDark;
+		}
+	}
+
+}

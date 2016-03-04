@@ -239,6 +239,7 @@ width: 80px;
 <!-- ko with: bModel -->
 <div class="btn btn-primary" data-bind="click: savePicks">Save</div>
 <!-- /ko -->
+<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button>
 
 
 <hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
@@ -433,16 +434,17 @@ width: 80px;
 <div data-bind="click: function(){$('#myModal').modal('show');}">Click to launch modal via JS </div>
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<!-- ko with: bModel.qModal -->
+<div id="myModal" class="modal fade" role="dialog" data-bind="css: status">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
       <div class="modal-header" style='font-weight:bold;'>
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Modal Header</h4>
+        <h4 class="modal-title" data-bind="html:headerText">Modal Header</h4>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" data-bind="html:message">
         <p>Some text in the modal.</p>
       </div>
       <div class="modal-footer">
@@ -452,3 +454,4 @@ width: 80px;
 
   </div>
 </div>
+<!-- /ko -->
