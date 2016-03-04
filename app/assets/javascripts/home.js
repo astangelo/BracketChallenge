@@ -1,4 +1,4 @@
-//alert("works");
+var seedIndex=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14];
 
 function ommit(id)
 {
@@ -28,7 +28,7 @@ function ommit(id)
 }
 var bModel;
 
-function bracketModel (teams){
+function bracketModel (data){
 	var self = this;
 
 	self.tree = ko.observable(new game());
@@ -41,8 +41,14 @@ function bracketModel (teams){
 	addChildGames(self.tree().leftChild().rightChild());
 	addChildGames(self.tree().rightChild().rightChild());
 
+    self.teamsArr = [];
+    $.each(data.teams2.slice(0,16), function(i,e){self.teamsArr.push(new Team({name:e[0], index:i, wins:e[1]}))});
+    
+    $('#messageDiv').text(JSON.stringify(self.teamsArr));
+	//self.teams2 = data.teams2;
 
-    if(teams) {self.teams = teams;}
+
+    if(data.teams) {self.teams = data.teams;}
     else {
       $modal = $('#myModal');
       $modal.find('.modal-body').text('There was an error with loading the data.  Please try refreshing.\n\nIf that doesn\'t work... blame Commissioner Yuval.');
@@ -59,7 +65,8 @@ function bracketModel (teams){
 	  {games: $.grep(self.games, function(e,i){return (e.level() == 3);}), roundClass: 'round1'}
 	]);
 
-	seedTeamsInArray(self.teams, self.rounds()[3].games);
+	//seedTeamsInArray(self.teams, self.rounds()[3].games);
+	seedTeamsInTree(self.teamsArr, self.rounds());
 
 	self.savePicks = function(){savePicks(self);};
 
@@ -78,8 +85,8 @@ function bracketModel (teams){
 //prototype of the game obj
 function game (home, away){
 	var self = this;
-	self.homeTeam = ko.observable(home);
-	self.awayTeam = ko.observable(away);
+	self.topTeam = ko.observable(home);
+	self.bottomTeam = ko.observable(away);
 	self.parent = ko.observable();
 	self.leftChild = ko.observable();
 	self.rightChild = ko.observable();
@@ -95,14 +102,23 @@ function game (home, away){
 		{
 			self.parent().winner(undefined);
 			if (self.direction == 'left') {
-				self.parent().homeTeam(newVal);
+				self.parent().bottomTeam(newVal);
 			}
 			else
 			{
-				self.parent().awayTeam(newVal);
+				self.parent().topTeam(newVal);
 			}
 		}
 	});
+}
+
+function Team (team)
+{
+	var self = this;
+	self.name = (team.name || 'N/A');
+	self.seed = ((team.seed == undefined) ? -1 : team.seed);
+	self.wins = (team.wins || 0);
+	self.index = ((team.index == undefined)? -1 : team.index);
 }
 
 //Seeds the blank child games
@@ -137,7 +153,7 @@ function ListGamesByDisplay(games, list){
 	}
 	ListGamesByDisplay(games.rightChild(), list);
 	ListGamesByDisplay(games.leftChild(), list);
-	x = []; 
+	var x = []; 
 	y = list.slice(0).reverse();
 	for (j in y) {x = x.concat(y[j]);}
 	return x;
@@ -150,12 +166,56 @@ function seedTeamsInArray (teams, bRow) {
 	  if(g<(teams.length / 2))
 	  {
 	    var t = g*2;
-	    bRow[g].homeTeam(teams[t]);
+	    bRow[g].topTeam(teams[t]);
 	    if(++t<teams.length)
 	    {
-	      bRow[g].awayTeam(teams[t]);
+	      bRow[g].bottomTeam(teams[t]);
 	    }
 	  }
+	}
+}
+
+function seedTeamsInTree (teams, bRounds)
+{
+	var roundsLen = bRounds.length;
+	var bRow = bRounds[roundsLen-1].games;
+	for (g in bRow)
+	{
+	  if(g<(teams.length / 2))
+	  {
+	    var t = g*2;
+	    bRow[g].topTeam(teams[seedIndex[t]]);
+	    if(++t<teams.length)
+	    {
+	      bRow[g].bottomTeam(teams[seedIndex[t]]);
+	    }
+	  }
+	}
+
+	var teamWins = {};
+
+	//Create hash of teamName to wins
+	$.each(teams,function(i,e){teamWins[e.name]=e.wins;});
+
+	//iterate through each round
+	//define winner by higher win #
+	for( x = (roundsLen-1); x>=0; x--)
+	{
+		console.log('We are in round '+x);
+		var games = bRounds[x].games
+		$.each(games, function(i,game){
+			//compare win # of top and bottom team to round (x)
+			//assign winner
+			if((game.topTeam && game.topTeam()) && (game.topTeam().wins > (roundsLen-x-1)))
+			{
+				game.winner(game.topTeam());
+			}
+			else if((game.bottomTeam && game.bottomTeam()) && (game.bottomTeam().wins > (roundsLen-x)))
+			{
+				game.winner(game.bottomTeam());
+			}
+		});
+
 	}
 }
 
@@ -188,7 +248,7 @@ function getTeams()
       console.log(data);
       console.log('-------------');
       //return data.teams;
-      bModel = new bracketModel(data.teams);
+      bModel = new bracketModel(data);
       ko.applyBindings(bModel);
     }).fail(function (jqXHR,status,error)
     {
@@ -199,7 +259,7 @@ function getTeams()
       console.log("Error: "+error);
       console.log('-------------');
       //return [];
-      bModel = new bracketModel([]);
+      bModel = new bracketModel({teams:[]});
       ko.applyBindings(bModel);
     });
 }

@@ -249,9 +249,9 @@ width: 80px;
 	  <div class="bracket-lines"></div>
 	  <!-- /ko -->
 		  <div class="bzn-group game_holder" data-toggle="buttons">
-		  	<label class="bzn bzn-primary lbl_team" data-bind="text: awayTeam, css: {'active': ((awayTeam()||0)==$data.winner())}, click: function(){$data.winner($data.awayTeam())}">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: ((topTeam()) ? topTeam().name : ''), css: {'active': ((topTeam()||0)==$data.winner())}, click: function(){$data.winner($data.topTeam())}">
 	  		</label>
-	  		<label class="bzn bzn-primary lbl_team" data-bind="text: homeTeam, css: {'active': ((homeTeam()||0)==$data.winner())},  click: function(){$data.winner($data.homeTeam())}">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: ((bottomTeam()) ? bottomTeam().name : ''), css: {'active': ((bottomTeam()||0)==$data.winner())},  click: function(){$data.winner($data.bottomTeam())}">
 	  		</label>
   		  </div>
 
@@ -267,43 +267,43 @@ width: 80px;
 
 <div class="bracket" style="clear: both;" data-bind="with: bModel">
 <!-- fko foreach: games -->
-  <div class="quad quad1">
+  <!--div class="quad quad1">
   	<div class="eigth">
 		<div class="round round1">
 			<div class="two_game_holder">
 			  <div class="bzn-group game_holder" data-toggle="buttons" data-bind="with:games[0]">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: topTeam">
 			  		<input type="radio" name="game1" id="option1" autocomplete="off" value="Purdue" >Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: bottomTeam">
 		  			<input type="radio" name="game1" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			  <div class="bracket-lines"></div>
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].topTeam">
 			  		<input type="radio" name="game2" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].bottomTeam">
 		  			<input type="radio" name="game2" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			</div>
 			<div class="two_game_holder">
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().topTeam">
 			  		<input type="radio" name="game3" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().bottomTeam">
 		  			<input type="radio" name="game3" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			  <div class="bracket-lines"></div>
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().topTeam">
 			  		<input type="radio" name="game4" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().bottomTeam">
 		  			<input type="radio" name="game4" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
@@ -312,19 +312,19 @@ width: 80px;
 		<div class="round round2">
 			<div class="two_game_holder">
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().topTeam">
 			  		<input type="radio" name="game5" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().bottomTeam">
 		  			<input type="radio" name="game5" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			  <div class="bracket-lines"></div>
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().topTeam">
 			  		<input type="radio" name="game6" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().bottomTeam">
 		  			<input type="radio" name="game6" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
@@ -332,10 +332,10 @@ width: 80px;
 		</div>
 		<div class="round round3">
 			<div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().topTeam">
 			  		<input type="radio" name="game7" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().bottomTeam">
 		  			<input type="radio" name="game7" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		</div>
@@ -346,38 +346,38 @@ width: 80px;
 		<div class="round round1">
 			<div class="two_game_holder">
 			  <div class="bzn-group game_holder" data-toggle="buttons" data-bind="with:games[0]">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: topTeam">
 			  		<input type="radio" name="game1" id="option1" autocomplete="off" value="Purdue" >Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: bottomTeam">
 		  			<input type="radio" name="game1" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			  <div class="bracket-lines"></div>
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].topTeam">
 			  		<input type="radio" name="game2" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].bottomTeam">
 		  			<input type="radio" name="game2" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			</div>
 			<div class="two_game_holder">
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().topTeam">
 			  		<input type="radio" name="game3" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().bottomTeam">
 		  			<input type="radio" name="game3" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			  <div class="bracket-lines"></div>
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().topTeam">
 			  		<input type="radio" name="game4" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().bottomTeam">
 		  			<input type="radio" name="game4" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
@@ -386,19 +386,19 @@ width: 80px;
 		<div class="round round2">
 			<div class="two_game_holder">
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().topTeam">
 			  		<input type="radio" name="game5" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().bottomTeam">
 		  			<input type="radio" name="game5" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
 			  <div class="bracket-lines"></div>
 			  <div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().topTeam">
 			  		<input type="radio" name="game6" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().bottomTeam">
 		  			<input type="radio" name="game6" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		  </div>
@@ -406,16 +406,16 @@ width: 80px;
 		</div>
 		<div class="round round3">
 			<div class="bzn-group game_holder" data-toggle="buttons">
-			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().awayTeam">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().topTeam">
 			  		<input type="radio" name="game7" id="option1" autocomplete="off" value="Purdue">Purdue
 		  		</label>
-		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().homeTeam">
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().bottomTeam">
 		  			<input type="radio" name="game7" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
 		  		</label>
 	  		</div>
 		</div>	
 	</div>
-  </div>
+  </div-->
 <!-- /fko -->
 </div>
 
@@ -425,6 +425,7 @@ width: 80px;
  %>
  <input type="text" id="txt_input" value="Hello World"></input>
  <div id="linkStatus"></div>
+ <div id="messageDiv"></div>
 
 
  <!-- Trigger the modal with a button -->
