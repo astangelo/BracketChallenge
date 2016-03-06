@@ -29,7 +29,7 @@ class TestController < ApplicationController
     	@gcount = t.home_teams.select{|x| x.winner.nil? == false}.count + t.away_teams.select{|x| x.winner.nil? == false}.count
     	teams[:teams2] << [t.team.name, @gcount]
     end
-#byebug    
+
 
 =begin    
     teams2=TeamInstance.select(|ti| ti.bracket.challenge.year = 2015)

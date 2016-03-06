@@ -99,7 +99,7 @@
     background-color: #5cb85c;
     border-color: #4cae4c;
 }
-.game_holder .team.selected:hover {
+.game_holder .team.selected.editable:hover {
 	color: #fff;
     background-color: #449d44;
     border-color: #398439;
@@ -134,7 +134,7 @@
 
     background-origin: padding-box;
     padding-bottom: 0px;
-    padding-left: 11.2px !important;
+    padding-left: 3px !important;
     padding-right: 0px;
     padding-top: 0px;
 
@@ -180,7 +180,7 @@ width: 80px;
 	border-radius: 0 0 8px 8px !important;
 	top: -1px;
 }
-.game_holder .lbl_team:hover {
+.game_holder .lbl_team.editable:hover {
 	background-color: #CCCCCC;
 	overflow: visible;
 }
@@ -195,7 +195,7 @@ width: 80px;
     border-color: #4cae4c;
     text-shadow: 1px 1px #999;
 }
-.game_holder .lbl_team.active:hover {
+.game_holder .lbl_team.active.editable:hover {
 	color: #eee;
     background-color: #449d44;
     border-color: #398439;
@@ -240,19 +240,21 @@ width: 80px;
 <div class="btn btn-primary" data-bind="click: savePicks">Save</div>
 <!-- /ko -->
 <button type="button" class="btn btn-info btn-md" data-bind="click: function(){qModal().show('This is just to show that the modal works.<br/><br/>Yay!');}">Open Modal</button>
+<button type="button" class="btn btn-success btn-md" data-bind="click:toggleEditable, css:{'btn-success': editable(), 'btn-warning': !editable()}">Toggle Editable</button>
 
 
 <hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
 <div class="bracket" style="clear: both;" data-bind="with: bModel">
+<div data-bind="text:'EAST'"></div>
 <!-- ko foreach: rounds.slice(0).reverse() -->
   <div class="round" data-bind="css: roundClass, foreach: games">
   	  <!-- ko if: ($index()%2 == 1)-->
 	  <div class="bracket-lines"></div>
 	  <!-- /ko -->
 		  <div class="bzn-group game_holder" data-toggle="buttons">
-		  	<label class="bzn bzn-primary lbl_team" data-bind="text: ((topTeam()) ? topTeam().name : ''), css: {'active': ((topTeam()||0)==$data.winner())}, click: function(){$data.winner($data.topTeam())}">
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: ((topTeam()) ? '('+(topTeam().seed+1)+') '+topTeam().name : ''), css: {'active': ((topTeam()||0)==$data.winner()), editable: $parent.model.editable()}, click: function(){if($parent.model.editable()){$data.winner($data.topTeam());}}">
 	  		</label>
-	  		<label class="bzn bzn-primary lbl_team" data-bind="text: ((bottomTeam()) ? bottomTeam().name : ''), css: {'active': ((bottomTeam()||0)==$data.winner())},  click: function(){$data.winner($data.bottomTeam())}">
+	  		<label class="bzn bzn-primary lbl_team" data-bind="text: ((bottomTeam()) ? '('+(bottomTeam().seed+1)+') '+bottomTeam().name : ''), css: {'active': ((bottomTeam()||0)==$data.winner()), editable: $parent.model.editable()},  click: function(){if($parent.model.editable()){$data.winner($data.bottomTeam());}}">
 	  		</label>
   		  </div>
 

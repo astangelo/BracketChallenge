@@ -13,7 +13,7 @@
   <tbody>
     <% @brackets.each do |bracket| %>
       <tr>
-        <td><%= bracket.challenge_id %></td>
+        <td><%= bracket.challenge.year %></td>
         <td><%= link_to 'Show', bracket %></td>
         <td><%= link_to 'Edit', edit_bracket_path(bracket) %></td>
         <td><%= link_to 'Destroy', bracket, method: :delete, data: { confirm: 'Are you sure?' } %></td>

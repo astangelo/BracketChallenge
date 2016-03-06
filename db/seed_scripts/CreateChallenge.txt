@@ -1,0 +1,2 @@
+Challenge.new({:year => 2015, :active => true}).save
+Bracket.new().save

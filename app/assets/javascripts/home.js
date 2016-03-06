@@ -32,6 +32,7 @@ function bracketModel (data){
 	var self = this;
 
 	self.qModal = ko.observable(new QModal());
+	self.editable = ko.observable(false);
 
 	self.tree = ko.observable(new game());
 	addChildGames(self.tree());
@@ -58,10 +59,10 @@ function bracketModel (data){
 	self.games = ListGamesByDisplay(self.tree(), []);
 
 	self.rounds = ko.observableArray([
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round4'},
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 1);}), roundClass: 'round3'},
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 2);}), roundClass: 'round2'},
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 3);}), roundClass: 'round1'}
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round4', model: self},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 1);}), roundClass: 'round3', model: self},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 2);}), roundClass: 'round2', model: self},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 3);}), roundClass: 'round1', model: self}
 	]);
 
 	//seedTeamsInArray(self.teams, self.rounds()[3].games);
@@ -78,6 +79,8 @@ function bracketModel (data){
 		}
 		return teamWins;
 	});
+
+	self.toggleEditable = function(){self.editable(!self.editable());}
 
 }
 
