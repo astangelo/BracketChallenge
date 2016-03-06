@@ -17,9 +17,9 @@
   <tbody>
     <% @team_instances.each do |team_instance| %>
       <tr>
-        <td><%= team_instance.team_id %></td>
-        <td><%= team_instance.bracket_id %></td>
-        <td><%= team_instance.quadrant_id %></td>
+        <td><%= team_instance.team.name %></td>
+        <td><%= team_instance.bracket.challenge.year %></td>
+        <td><%= team_instance.quadrant.name %></td>
         <td><%= team_instance.abbreviation %></td>
         <td><%= team_instance.seed %></td>
         <td><%= link_to 'Show', team_instance %></td>

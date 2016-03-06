@@ -19,7 +19,20 @@ class TestController < ApplicationController
   end
 
   def getTeamList
+  	#@teams = TeamInstance.find()
     #teams = {'resp' => params["vars"]}.to_json
+    
+
+    teams = {teams2:[], teams:[]}
+    
+    TeamInstance.order(:seed).each do |t|
+    	@gcount = t.home_teams.select{|x| x.winner.nil? == false}.count + t.away_teams.select{|x| x.winner.nil? == false}.count
+    	teams[:teams2] << [t.team.name, @gcount]
+    end
+#byebug    
+
+=begin    
+    teams2=TeamInstance.select(|ti| ti.bracket.challenge.year = 2015)
     teams = {teams:[
 		  'Purdue',
 		  'Maryland',
@@ -101,13 +114,15 @@ class TestController < ApplicationController
            ["UAB", 1],
            ["N. Dakota St", 0],
            ["Robert Morris", 0]]}.to_json
+    
+=end
 
-	render :json => teams
+	render :json => teams.to_json
 
   end
 
   def saveTeamPicks
-  	#byebug
+  	byebug
   	picks = params["teams"]
   	render :json => {}
   	#head :no_content

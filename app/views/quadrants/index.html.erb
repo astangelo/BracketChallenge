@@ -15,7 +15,7 @@
   <tbody>
     <% @quadrants.each do |quadrant| %>
       <tr>
-        <td><%= quadrant.bracket_id %></td>
+        <td><%= quadrant.challenge.year %></td>
         <td><%= quadrant.name %></td>
         <td><%= quadrant.order %></td>
         <td><%= link_to 'Show', quadrant %></td>

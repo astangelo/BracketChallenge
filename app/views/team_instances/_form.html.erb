@@ -14,16 +14,16 @@
   <div class="field">
     <%= f.label :bracket_id %><br>
     <!--%= f.number_field :bracket_id %-->
-    <%= f.collection_select :bracket_id, Bracket.all.collect, :id, :challenge_id, :prompt => "Select a bracket" %>
-
+    <!--%= f.collection_select :bracket_id, Bracket.all.collect, :id, :challenge_id, :prompt => "Select a bracket" %-->
+    <%= f.select :bracket_id, Bracket.all.collect {|x| [x.challenge.year, x.id]}, {:prompt => "Select a year"} %>
   </div>
   <div class="field">
     <%= f.label :team_id %><br>
-    <%= f.collection_select :team_id, Team.all.collect, :id, :name, :prompt => "Select a team" %>
+    <%= f.collection_select :team_id, Team.all.order('name ASC'), :id, :name, :prompt => "Select a team" %>
   </div>
   <div class="field">
     <%= f.label :quadrant_id %><br>
-    <%= f.number_field :quadrant_id %>
+    <%= f.grouped_collection_select :quadrant_id, Challenge.order(:year), :quadrants, :year, :id, :name, :prompt => "Select a quadrant", include_blank: true%>
 </div>
   </div>
   <div class="field">
@@ -32,7 +32,7 @@
   </div>
   <div class="field">
     <%= f.label :seed %><br>
-    <%= f.number_field :seed %>
+    <%= f.select :seed, (1..16).collect {|x| [x, x]}, {:prompt => "Select a seed"} %>
   </div>
   <div class="actions">
     <%= f.submit %>

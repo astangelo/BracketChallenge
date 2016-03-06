@@ -13,11 +13,12 @@
 
   <div class="field">
     <%= f.label :home_team_id %><br>
-    <%= f.number_field :home_team_id %>
+    <%= f.collection_select :home_team_id, Team.all.order('name ASC'), :id, :name, :prompt => "Select a team" %>
+
   </div>
   <div class="field">
     <%= f.label :away_team_id %><br>
-    <%= f.number_field :away_team_id %>
+    <%= f.collection_select :away_team_id, Team.all.order('name ASC'), :id, :name, :prompt => "Select a team" %>
   </div>
   <div class="field">
     <%= f.label :home_team_score %><br>
@@ -41,7 +42,7 @@
   </div>
   <div class="field">
     <%= f.label :quadrant_id %><br>
-    <%= f.number_field :quadrant_id %>
+    <%= f.grouped_collection_select :quadrant_id, Challenge.order(:year), :quadrants, :year, :id, :name, :prompt => "Select a quadrant", include_blank: true%>
   </div>
   <div class="actions">
     <%= f.submit %>

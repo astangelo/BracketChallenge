@@ -44,7 +44,7 @@ function bracketModel (data){
 	addChildGames(self.tree().rightChild().rightChild());
 
     self.teamsArr = [];
-    $.each(data.teams2.slice(0,16), function(i,e){self.teamsArr.push(new Team({name:e[0], index:i, wins:e[1]}))});
+    $.each(data.teams2.slice(0,16), function(i,e){self.teamsArr.push(new Team({name:e[0], seed:i, index:seedIndex[i], wins:e[1]}))});
     
     $('#messageDiv').text(JSON.stringify(self.teamsArr));
 	//self.teams2 = data.teams2;
@@ -71,10 +71,10 @@ function bracketModel (data){
 
 	self.tallyWins = ko.computed(function() {
 		var teamWins = {};
-		for (t in self.teams)
+		for (t in self.teamsArr)
 		{
-			var count = $.grep(self.games, function(e,i){ return (e.winner() == self.teams[t]); }).length;
-			teamWins[""+self.teams[t]] = count;
+			var count = $.grep(self.games, function(e,i){ return (e.winner() == self.teamsArr[t]); }).length;
+			teamWins[""+self.teamsArr[t].name] = count;
 		}
 		return teamWins;
 	});
