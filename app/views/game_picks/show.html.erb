@@ -2,12 +2,12 @@
 
 <p>
   <strong>User entry:</strong>
-  <%= @game_pick.user_entry_id %>
+  <%= @game_pick.user_entry.user.fullname %>
 </p>
 
 <p>
   <strong>Team instance:</strong>
-  <%= @game_pick.team_instance_id %>
+  <%= raw(@game_pick.team_instance_id ? @game_pick.team_instance.team.name : "<span class='italics'>N/A</span>") %>
 </p>
 
 <p>

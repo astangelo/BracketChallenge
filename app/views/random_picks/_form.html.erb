@@ -13,15 +13,17 @@
 
   <div class="field">
     <%= f.label :user_entry_id %><br>
-    <%= f.number_field :user_entry_id %>
+    <%= f.select :user_entry_id, UserEntry.all.collect {|x| ["#{x.user.fullname} (#{x.challenge.year})", x.id]}, {:prompt => "Select a User Entry"} %>
+
   </div>
   <div class="field">
     <%= f.label :team_instance_id %><br>
-    <%= f.number_field :team_instance_id %>
+    <%= f.select :team_instance_id, TeamInstance.all.collect {|x| ["#{x.team.name} (#{x.bracket.challenge.year})", x.id]}, {:prompt => "Select a User Entry"} %>
+
   </div>
   <div class="field">
     <%= f.label :round %><br>
-    <%= f.number_field :round %>
+    <%= f.number_field :round %> <span style="color:#F00;">&lt;&lt; Leave blank, for now.</span>
   </div>
   <div class="actions">
     <%= f.submit %>

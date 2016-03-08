@@ -13,15 +13,15 @@
 
   <div class="field">
     <%= f.label :user_entry_id %><br>
-    <%= f.number_field :user_entry_id %>
+    <%= f.select :user_entry_id, UserEntry.all.collect {|x| [x.user.fullname, x.id]}, {:prompt => "Select a User"} %>
   </div>
   <div class="field">
     <%= f.label :team_instance_id %><br>
-    <%= f.number_field :team_instance_id %>
+    <%= f.select :team_instance_id, TeamInstance.all.collect {|x| [x.team.name, x.id]}, {:prompt => "Select a Team"} %>
   </div>
   <div class="field">
     <%= f.label :round %><br>
-    <%= f.number_field :round %>
+    <%= f.select :round, (1..6).collect {|x| [x, x]}, {:prompt => "Select an order"} %>
   </div>
   <div class="actions">
     <%= f.submit %>

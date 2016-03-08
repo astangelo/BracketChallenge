@@ -15,9 +15,9 @@
   <tbody>
     <% @game_picks.each do |game_pick| %>
       <tr>
-        <td><%= game_pick.user_entry_id %></td>
-        <td><%= game_pick.team_instance_id %></td>
-        <td><%= game_pick.round %></td>
+        <td><%= "#{game_pick.user_entry.user.fullname} (#{game_pick.user_entry.challenge.year})" %></td>
+        <td class="center"><%= raw(game_pick.team_instance_id ? game_pick.team_instance.team.name : "<span class='italics'>N/A</span>") %></td>
+        <td class="center"><%= game_pick.round.to_i %></td>
         <td><%= link_to 'Show', game_pick %></td>
         <td><%= link_to 'Edit', edit_game_pick_path(game_pick) %></td>
         <td><%= link_to 'Destroy', game_pick, method: :delete, data: { confirm: 'Are you sure?' } %></td>

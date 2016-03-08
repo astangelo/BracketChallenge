@@ -28,6 +28,21 @@ class UserEntriesController < ApplicationController
 
     respond_to do |format|
       if @user_entry.save
+        #byebug
+
+        #seeding the random picks
+        (1..8).each do |r|
+          RandomPick.new({user_entry_id: @user_entry.id}).save
+        end
+
+        #seeding the suicide pick
+        SuicidePick.new({user_entry_id: @user_entry.id}).save
+
+        #seeding the game picks
+        @user_entry.challenge.team_instances.each do |t|
+          GamePick.new({user_entry_id: @user_entry.id, team_instance_id: t, round: 0}).save
+        end
+
         format.html { redirect_to @user_entry, notice: 'User entry was successfully created.' }
         format.json { render :show, status: :created, location: @user_entry }
       else

@@ -1,0 +1,15 @@
+select te.id, g.id from teaminstance te inner join team t on t.id = te.team_id inner join games g on te.quadrant_id = g.quadrant_id
+
+Team.count_by_sql("select count(*) from team_instances te inner join teams t on t.id = te.team_id inner join games g on te.quadrant_id = g.quadrant_id")
+
+
+Team.find_by_sql("select * from team_instances te inner join teams t on t.id = te.team_id inner join games g on te.quadrant_id = g.quadrant_id")
+
+
+heroku pg:push mylocaldb HEROKU_POSTGRESQL_MAGENTA --app sushi
+heroku pg:push bracketchallenge_development HEROKU_POSTGRESQL_MAGENTA --app warm-reaches-36524
+bracketchallenge_development
+warm-reaches-36524
+
+
+heroku config:get -a warm-reaches-36524

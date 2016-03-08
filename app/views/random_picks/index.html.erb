@@ -7,7 +7,7 @@
     <tr>
       <th>User entry</th>
       <th>Team instance</th>
-      <th>Round</th>
+      <!--th>Round</th-->
       <th colspan="3"></th>
     </tr>
   </thead>
@@ -15,9 +15,9 @@
   <tbody>
     <% @random_picks.each do |random_pick| %>
       <tr>
-        <td><%= random_pick.user_entry_id %></td>
-        <td><%= random_pick.team_instance_id %></td>
-        <td><%= random_pick.round %></td>
+        <td><%= "#{random_pick.user_entry.user.fullname} (#{random_pick.user_entry.challenge.year})" %></td>
+        <td class="center"><%= (random_pick.team_instance_id ? random_pick.user_entry.challenge.year : "<span class='italics'>N/A</span>").html_safe %></td>
+        <!--td><%= random_pick.round %></td-->
         <td><%= link_to 'Show', random_pick %></td>
         <td><%= link_to 'Edit', edit_random_pick_path(random_pick) %></td>
         <td><%= link_to 'Destroy', random_pick, method: :delete, data: { confirm: 'Are you sure?' } %></td>

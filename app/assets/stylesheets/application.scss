@@ -18,6 +18,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+table {
+	td {
+	  padding: .25em .75em;
+	}
+	th {
+	  text-align: center;
+	  padding: .25em 1em;
+	}
+}
+.italic, .italics {text-style:italic;}
+.center {text-align:center;}
+.bold {font-weight:bold;}
+
 .but {
     color: #fff;
     background-color: #337ab7;

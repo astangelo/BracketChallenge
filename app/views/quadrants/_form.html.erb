@@ -14,8 +14,6 @@
   <div class="field">
     <%= f.label :bracket_id %><br>
     <%= f.select :bracket_id, Bracket.all.collect {|x| [x.challenge.year, x.id]}, {:prompt => "Select a year"} %>
-
-
   </div>
 
 
@@ -25,9 +23,7 @@
   </div>
   <div class="field">
     <%= f.label :order %><br>
-
     <%= f.select :order, [1,2,3,4].collect {|x| [x, x]}, {:prompt => "Select an order"} %>
-
   </div>
   <div class="actions">
     <%= f.submit %>
