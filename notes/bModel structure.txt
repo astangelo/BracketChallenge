@@ -1,0 +1,36 @@
+bmodel ->
+	selectedUser
+	bracket
+	editable
+
+	gamePicks = {}
+		Display
+			compare with actual bracket - displays the filled out bracket, ins
+				loss - red (spin forward)
+				won - green
+				haven't played - grey
+				in progress - blue
+		Editable
+			click
+				set winner
+				update next round
+	randomPicks = {}
+		Display
+			compare with actual bracket - displays actual bracket
+				loss - red
+				won - green
+				haven't played - grey
+				in progress - blue
+		Editable - none
+	suicidePick = {}
+		Display
+			compare with actual bracket - displays actual bracket
+				loss - red
+				won - green
+				haven't played - grey
+				in progress - blue
+		Editable
+			click
+				set winner
+				validate
+
