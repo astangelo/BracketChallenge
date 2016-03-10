@@ -31,18 +31,27 @@ var bModel, qModal;
 function bracketModel (data){
 	var self = this;
 
+	//Imporant Globals
 	self.qModal = ko.observable(new QModal());
 	self.editable = ko.observable(false);
+	self.selectedUser = ko.observable(1);
+	self.bracketType = ko.observable(0);
+	self.bracketTypeDef = ["bracket","selected","random","suicide"];
+	self.bracket = ko.observable(new game(self));
 
-	self.tree = ko.observable(new game());
-	addChildGames(self.tree());
-	addChildGames(self.tree().leftChild());
-	addChildGames(self.tree().rightChild());
+	//self.click = 
 
-	addChildGames(self.tree().leftChild().leftChild());
-	addChildGames(self.tree().rightChild().leftChild());
-	addChildGames(self.tree().leftChild().rightChild());
-	addChildGames(self.tree().rightChild().rightChild());
+	//self.css = 
+
+	//Need to replace with an automation
+	addChildGames(self.bracket());
+	addChildGames(self.bracket().leftChild());
+	addChildGames(self.bracket().rightChild());
+
+	addChildGames(self.bracket().leftChild().leftChild());
+	addChildGames(self.bracket().rightChild().leftChild());
+	addChildGames(self.bracket().leftChild().rightChild());
+	addChildGames(self.bracket().rightChild().rightChild());
 
     self.teamsArr = [];
     $.each(data.teams2.slice(0,16), function(i,e){self.teamsArr.push(new Team({name:e[0], seed:i, index:seedIndex[i], wins:e[1]}))});
@@ -56,7 +65,7 @@ function bracketModel (data){
     	self.qModal().show('There was an error with loading the data.  Please try refreshing.\n\nIf that doesn\'t work... blame Commissioner Yuval.','randomError','warning');
    	}
 
-	self.games = ListGamesByDisplay(self.tree(), []);
+	self.games = ListGamesByDisplay(self.bracket(), []);
 
 	self.rounds = ko.observableArray([
 	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round4', model: self},
@@ -66,7 +75,7 @@ function bracketModel (data){
 	]);
 
 	//seedTeamsInArray(self.teams, self.rounds()[3].games);
-	seedTeamsInTree(self.teamsArr, self.rounds());
+	seedTeamsInBracket(self.teamsArr, self.rounds());
 
 	self.savePicks = function(){savePicks(self);};
 
@@ -85,10 +94,12 @@ function bracketModel (data){
 }
 
 //prototype of the game obj
-function game (home, away){
+function game (pModel, home, away){
 	var self = this;
+	self.parentModel = ko.observable(pModel);
 	self.topTeam = ko.observable(home);
 	self.bottomTeam = ko.observable(away);
+	self.teams = ko.computed(function(){return [self.topTeam(), self.bottomTeam()];});
 	self.parent = ko.observable();
 	self.leftChild = ko.observable();
 	self.rightChild = ko.observable();
@@ -98,6 +109,20 @@ function game (home, away){
 	  return ((self.parent && self.parent()) ? self.parent().level()+1 : 0);
 	});
 	self.roundClass = ko.computed(function(){return "round"+self.level;});
+	self.editable = ko.computed(function(){return self.parentModel().editable();});
+	
+	self.css = ko.computed(function(){
+		//return some classes
+		ret = "";
+		ret += ((self.parentModel().editable()) ? "editable" : "");
+		return ret;
+	});
+	
+	self.click = ko.computed(function(){
+		if (!self.parentModel().editable()) {return;}
+
+		//switch off of self.bracketType()
+	});
 
 	self.winner.subscribe(function(newVal){
 		if (self.parent())
@@ -137,8 +162,8 @@ function Team (team)
 
 //Seeds the blank child games
 function addChildGames(ob){
-	ob.leftChild(new game());
-	ob.rightChild(new game());
+	ob.leftChild(new game(ob.parentModel()));
+	ob.rightChild(new game(ob.parentModel()));
 	ob.leftChild().parent(ob);
 	ob.rightChild().parent(ob);
 	ob.leftChild().direction = 'left';
@@ -189,7 +214,7 @@ function seedTeamsInArray (teams, bRow) {
 	}
 }
 
-function seedTeamsInTree (teams, bRounds)
+function seedTeamsInBracket(teams, bRounds)
 {
 	var roundsLen = bRounds.length;
 	var bRow = bRounds[roundsLen-1].games;

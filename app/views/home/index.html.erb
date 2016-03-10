@@ -204,6 +204,14 @@ width: 80px;
 	outline: 5px auto -webkit-focus-ring-color;
     outline-offset: -2px;
 }
+.vertical {
+	transform: rotate(90deg);
+	transform-origin: left top 0;
+    text-align: center;
+    width: 34em;
+    font-weight: bold;
+    background-color: #C1F0F6;
+}
 
 
 
@@ -245,18 +253,17 @@ width: 80px;
 
 <hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
 <div class="bracket" style="clear: both;" data-bind="with: bModel">
-<div data-bind="text:'EAST'"></div>
+<div data-bind="text:'EAST'" class="vertical"></div>
 <!-- ko foreach: rounds.slice(0).reverse() -->
   <div class="round" data-bind="css: roundClass, foreach: games">
   	  <!-- ko if: ($index()%2 == 1)-->
 	  <div class="bracket-lines"></div>
 	  <!-- /ko -->
 		  <div class="bzn-group game_holder" data-toggle="buttons">
-		  	<label class="bzn bzn-primary lbl_team" data-bind="text: ((topTeam()) ? '('+(topTeam().seed+1)+') '+topTeam().name : ''), css: {'active': ((topTeam()||0)==$data.winner()), editable: $parent.model.editable()}, click: function(){if($parent.model.editable()){$data.winner($data.topTeam());}}">
-	  		</label>
-	  		<label class="bzn bzn-primary lbl_team" data-bind="text: ((bottomTeam()) ? '('+(bottomTeam().seed+1)+') '+bottomTeam().name : ''), css: {'active': ((bottomTeam()||0)==$data.winner()), editable: $parent.model.editable()},  click: function(){if($parent.model.editable()){$data.winner($data.bottomTeam());}}">
-	  		</label>
-  		  </div>
+	  <!-- ko foreach: teams -->
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: ($data ? '('+($data.seed+1)+') '+name : ''), css: {'active': (($data||0)==$parent.winner()), editable: $parent.editable()}, click: function(){if($parent.editable()){$parent.winner($data);}}"></label>
+   	  <!-- /ko -->
+ 		  </div>
 
   </div>
 
