@@ -13,12 +13,12 @@
 
   <div class="field">
     <%= f.label :home_team_id %><br>
-    <%= f.collection_select :home_team_id, Team.all.order('name ASC'), :id, :name, :prompt => "Select a team" %>
+    <%= f.select :home_team_id, TeamInstance.all.collect {|x| [x.team.name, x.id]}, {:prompt => "Select a team"} %>
 
   </div>
   <div class="field">
     <%= f.label :away_team_id %><br>
-    <%= f.collection_select :away_team_id, Team.all.order('name ASC'), :id, :name, :prompt => "Select a team" %>
+    <%= f.select :away_team_id, TeamInstance.all.collect {|x| [x.team.name, x.id]}, {:prompt => "Select a team"} %>
   </div>
   <div class="field">
     <%= f.label :home_team_score %><br>
