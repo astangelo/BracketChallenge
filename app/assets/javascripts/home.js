@@ -34,10 +34,22 @@ function bracketModel (data){
 	//Imporant Globals
 	self.qModal = ko.observable(new QModal());
 	self.editable = ko.observable(false);
-	self.selectedUser = ko.observable(1);
 	self.bracketType = ko.observable(0);
 	self.bracketTypeDef = ["bracket","selected","random","suicide"];
+
+	self.bracketModeOptions = ["actual","selected","random","suicide"];
+	self.bracketMode = ko.observable(0);
+	self.bracketModeLabel = ko.observable("hello world"); //ko.computed(function(){return "hello world";});
+
+	self.users = ko.observableArray();
+	if(data.users) {self.users(data.users);}
+	self.selectedUserId = ko.observable(3);
+	self.selectedUser = ko.computed(function(){
+		return $.grep(self.users(), function(e,i) {return ( e.id == self.selectedUserId());})[0];
+	});
+	self.user_picks = ko.observableArray();
 	self.bracket = ko.observable(new game(self));
+
 
 	//self.click = 
 
@@ -54,7 +66,7 @@ function bracketModel (data){
 	addChildGames(self.bracket().rightChild().rightChild());
 
     self.teamsArr = [];
-    $.each(data.teams2.slice(0,16), function(i,e){self.teamsArr.push(new Team({name:e[0], seed:i, index:seedIndex[i], wins:e[1]}))});
+    $.each(data.teams2.slice(0,16), function(i,e){self.teamsArr.push(new Team({name:e[0], seed:i, index:seedIndex[i], wins:e[1], pmodel: self}))});
     
     $('#messageDiv').text(JSON.stringify(self.teamsArr));
 	//self.teams2 = data.teams2;
@@ -64,6 +76,9 @@ function bracketModel (data){
     else {
     	self.qModal().show('There was an error with loading the data.  Please try refreshing.\n\nIf that doesn\'t work... blame Commissioner Yuval.','randomError','warning');
    	}
+
+
+   	if(data.user_picks) {self.user_picks(data.users);}
 
 	self.games = ListGamesByDisplay(self.bracket(), []);
 
@@ -97,8 +112,15 @@ function bracketModel (data){
 function game (pModel, home, away){
 	var self = this;
 	self.parentModel = ko.observable(pModel);
-	self.topTeam = ko.observable(home);
-	self.bottomTeam = ko.observable(away);
+
+	self.topTeamHolder = ko.observable(home);
+	self.bottomTeamHolder = ko.observable(away);
+	self.bracketMode = ko.computed(function(){return self.parentModel().bracketMode();});
+	self.topTeam = ko.computed(function(){
+		//return self.topTeamHolder;
+		return ((self.bracketMode() == 0) ? self.topTeamHolder() : undefined);
+	});
+	self.bottomTeam = ko.computed(function(){return ((self.bracketMode() == 0) ? self.bottomTeamHolder() : undefined)	});
 	self.teams = ko.computed(function(){return [self.topTeam(), self.bottomTeam()];});
 	self.parent = ko.observable();
 	self.leftChild = ko.observable();
@@ -129,11 +151,11 @@ function game (pModel, home, away){
 		{
 			self.parent().winner(undefined);
 			if (self.direction == 'left') {
-				self.parent().bottomTeam(newVal);
+				self.parent().bottomTeamHolder(newVal);
 			}
 			else
 			{
-				self.parent().topTeam(newVal);
+				self.parent().topTeamHolder(newVal);
 			}
 		}
 	});
@@ -149,6 +171,14 @@ function game (pModel, home, away){
 
 		return wins;
 	});
+	//self.topTeam.subscribe(function(){self.topTeam().game(self);});
+	//self.bottomTeam.subscribe(function(){self.bottomTeam().game(self);});
+
+	//------------------------
+	self.Real = ko.observable();
+	self.Selected = ko.observable();
+	self.Random = ko.observable();
+	self.Suicide = ko.observable();
 }
 
 function Team (team)
@@ -158,6 +188,14 @@ function Team (team)
 	self.seed = ((team.seed == undefined) ? -1 : team.seed);
 	self.wins = (team.wins || 0);
 	self.index = ((team.index == undefined)? -1 : team.index);
+	self.game = ko.observable();
+	self.parentModel = ko.observable(team.pmodel);
+	self.click = function(data){
+		if(self.parentModel().editable())
+		{
+			if(self.game()) {self.game().winner(self);}
+		}
+	}
 }
 
 //Seeds the blank child games
@@ -205,10 +243,10 @@ function seedTeamsInArray (teams, bRow) {
 	  if(g<(teams.length / 2))
 	  {
 	    var t = g*2;
-	    bRow[g].topTeam(teams[t]);
+	    bRow[g].topTeamHolder(teams[t]);
 	    if(++t<teams.length)
 	    {
-	      bRow[g].bottomTeam(teams[t]);
+	      bRow[g].bottomTeamHoder(teams[t]);
 	    }
 	  }
 	}
@@ -223,10 +261,10 @@ function seedTeamsInBracket(teams, bRounds)
 	  if(g<(teams.length / 2))
 	  {
 	    var t = g*2;
-	    bRow[g].topTeam(teams[seedIndex[t]]);
+	    bRow[g].topTeamHolder(teams[seedIndex[t]]);
 	    if(++t<teams.length)
 	    {
-	      bRow[g].bottomTeam(teams[seedIndex[t]]);
+	      bRow[g].bottomTeamHolder(teams[seedIndex[t]]);
 	    }
 	  }
 	}

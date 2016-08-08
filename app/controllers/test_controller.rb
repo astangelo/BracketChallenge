@@ -22,13 +22,30 @@ class TestController < ApplicationController
   	#@teams = TeamInstance.find()
     #teams = {'resp' => params["vars"]}.to_json
     
+    @year = 2015
+    @challenge = Challenge.where(year: 2015).first()
 
-    teams = {teams2:[], teams:[]}
+    teams = {teams2:[], teams:[], users:[], user_picks:[]}
     
     TeamInstance.order(:seed).each do |t|
     	@gcount = t.home_teams.select{|x| x.winner.nil? == false}.count + t.away_teams.select{|x| x.winner.nil? == false}.count
     	teams[:teams2] << [t.team.name, @gcount]
     end
+
+
+
+    @challenge.user_entries.each do |u|
+      @games = []
+      u.game_picks.each do |g|
+        if (!g.team_instance.nil?) then
+          @games << [g.team_instance.team.name, g.round]
+        end
+
+      end
+      teams[:users] << u.user
+      teams[:user_picks] << {user:u.user.first_name, selected:@games}
+    end
+
 
 
 =begin    

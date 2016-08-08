@@ -1,0 +1,56 @@
+Potential KO Datamodels
+
+  (1) Team 1
+  (8) Team 2
+
+
+Bracket 
+|
+|
+Node (tree)
+|
+|
+|
+Node
+  |
+  |- TopTeam
+  |- BottomTeam
+  |- Status
+  |- Users (list)
+      |- User1
+         |- Bracket
+             |- Top Team
+             |- Bottom Team
+         |- Suicide
+             |- Top Team
+             |- Bottom Team
+         |- Random
+             |- Top Team
+             |- Bottom Team
+
+
+
+Bracket 
+|
+|
+Node (tree)
+|
+|
+|
+Node
+  |
+  |- Real
+      |- Top Team
+      |- Bottom Team
+  |- Bracket (list)
+      |- User1
+          |- Top Team
+          |- Bottom Team
+      |- User2
+          |- Top Team
+          |- Bottom Team
+  |- Suicide
+      |- User1
+          |- Top Team
+          |- Bottom Team  
+
