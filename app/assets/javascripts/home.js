@@ -1,4 +1,4 @@
-var seedIndex=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14];
+var seedIndex=[0,15,7,8,4,11,3,12,5,10,2,13,6,9,1,14,16,31,23,24,20,27,19,28,21,26,18,29,22,25,17,30];
 
 function ommit(id)
 {
@@ -31,6 +31,8 @@ var bModel, qModal;
 function bracketModel (data){
 	var self = this;
 
+	var numberOfTeams = 32;
+
 	//Imporant Globals
 	self.qModal = ko.observable(new QModal());
 	self.editable = ko.observable(false);
@@ -40,6 +42,9 @@ function bracketModel (data){
 	self.bracketModeOptions = ["actual","selected","random","suicide"];
 	self.bracketMode = ko.observable(0);
 	self.bracketModeLabel = ko.observable("hello world"); //ko.computed(function(){return "hello world";});
+
+	self.quadrants = ko.observableArray();
+	$.each(data.quadrants, function(i,e){self.quadrants().push({name:e, hidden:(numberOfTeams<((i+1)*16))});});
 
 	self.users = ko.observableArray();
 	if(data.users) {self.users(data.users);}
@@ -63,10 +68,20 @@ function bracketModel (data){
 	addChildGames(self.bracket().leftChild().leftChild());
 	addChildGames(self.bracket().rightChild().leftChild());
 	addChildGames(self.bracket().leftChild().rightChild());
-	addChildGames(self.bracket().rightChild().rightChild());
+	addChildGames(self.bracket().rightChild().rightChild());	
+
+	addChildGames(self.bracket().leftChild().leftChild().leftChild());
+	addChildGames(self.bracket().leftChild().leftChild().rightChild());
+	addChildGames(self.bracket().rightChild().leftChild().leftChild());
+	addChildGames(self.bracket().rightChild().leftChild().rightChild());
+	addChildGames(self.bracket().leftChild().rightChild().leftChild());
+	addChildGames(self.bracket().leftChild().rightChild().rightChild());
+	addChildGames(self.bracket().rightChild().rightChild().leftChild());
+	addChildGames(self.bracket().rightChild().rightChild().rightChild());
+	
 
     self.teamsArr = [];
-    $.each(data.teams2.slice(0,16), function(i,e){self.teamsArr.push(new Team({name:e[0], seed:i, index:seedIndex[i], wins:e[1], pmodel: self}))});
+    $.each(data.teams2.slice(0,numberOfTeams), function(i,e){self.teamsArr.push(new Team({name:e[0], seed:i, index:seedIndex[i], wins:e[1], pmodel: self}))});
     
     $('#messageDiv').text(JSON.stringify(self.teamsArr));
 	//self.teams2 = data.teams2;
@@ -83,10 +98,11 @@ function bracketModel (data){
 	self.games = ListGamesByDisplay(self.bracket(), []);
 
 	self.rounds = ko.observableArray([
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round4', model: self},
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 1);}), roundClass: 'round3', model: self},
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 2);}), roundClass: 'round2', model: self},
-	  {games: $.grep(self.games, function(e,i){return (e.level() == 3);}), roundClass: 'round1', model: self}
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 0);}), roundClass: 'round5', model: self},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 1);}), roundClass: 'round4', model: self},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 2);}), roundClass: 'round3', model: self},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 3);}), roundClass: 'round2', model: self},
+	  {games: $.grep(self.games, function(e,i){return (e.level() == 4);}), roundClass: 'round1', model: self}
 	]);
 
 	//seedTeamsInArray(self.teams, self.rounds()[3].games);
@@ -171,8 +187,10 @@ function game (pModel, home, away){
 
 		return wins;
 	});
-	//self.topTeam.subscribe(function(){self.topTeam().game(self);});
-	//self.bottomTeam.subscribe(function(){self.bottomTeam().game(self);});
+
+	// --Why were these commentted out?
+	self.topTeam.subscribe(function(){self.topTeam().game(self);});
+	self.bottomTeam.subscribe(function(){self.bottomTeam().game(self);});
 
 	//------------------------
 	self.Real = ko.observable();
@@ -193,6 +211,7 @@ function Team (team)
 	self.click = function(data){
 		if(self.parentModel().editable())
 		{
+			console.log("click:",self);
 			if(self.game()) {self.game().winner(self);}
 		}
 	}
@@ -237,7 +256,6 @@ function ListGamesByDisplay(games, list){
 }
 
 function seedTeamsInArray (teams, bRow) {
-    var x = 3;
 	for (g in bRow)
 	{
 	  if(g<(teams.length / 2))
@@ -287,7 +305,7 @@ function seedTeamsInBracket(teams, bRounds)
 			{
 				game.winner(game.topTeam());
 			}
-			else if((game.bottomTeam && game.bottomTeam()) && (game.bottomTeam().wins > (roundsLen-x)))
+			else if((game.bottomTeam && game.bottomTeam()) && (game.bottomTeam().wins > (roundsLen-x-1)))
 			{
 				game.winner(game.bottomTeam());
 			}
@@ -370,7 +388,8 @@ function QModal() {
 	}
 }
 
-$('document').ready(function(){
-    //getTeams() implements an AJAX call. Bindings are applied as part of response.
-    data = getTeams();
-});
+var ready = function() {
+	data = getTeams();
+};
+
+$(document).ready(ready);

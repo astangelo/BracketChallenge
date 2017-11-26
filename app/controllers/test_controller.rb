@@ -25,13 +25,17 @@ class TestController < ApplicationController
     @year = 2015
     @challenge = Challenge.where(year: 2015).first()
 
-    teams = {teams2:[], teams:[], users:[], user_picks:[]}
+    teams = {teams2:[], teams:[], users:[], user_picks:[], quadrants: []}
     
-    TeamInstance.order(:seed).each do |t|
-    	@gcount = t.home_teams.select{|x| x.winner.nil? == false}.count + t.away_teams.select{|x| x.winner.nil? == false}.count
+    # TeamInstance.order(:bracket_seed).each do |t|
+    TeamInstance.all.sort {|a,b| a.bracket_seed <=> b.bracket_seed}.each do |t|
+    	@gcount = t.home_teams.select{|x| ((x.winner.nil? == false) && (x.winner == t))}.count + t.away_teams.select{|x| ((x.winner.nil? == false) && (x.winner == t))}.count
     	teams[:teams2] << [t.team.name, @gcount]
     end
 
+    @challenge.quadrants.order(:order).each do |q|
+      teams[:quadrants] << q.name
+    end
 
 
     @challenge.user_entries.each do |u|

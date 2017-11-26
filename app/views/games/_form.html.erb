@@ -10,24 +10,28 @@
       </ul>
     </div>
   <% end %>
+  <div class="container">
+    <div class="field col-lg-6">
+      <%= f.label :home_team_id %><br>
+      <%= f.select :home_team_id, TeamInstance.all.collect {|x| [x.team.name, x.id]}, {:prompt => "Select a team"} %>
+    </div>
+    <div class="field col-lg-6">
+      <%= f.label :home_team_score %><br>
+      <%= f.number_field :home_team_score %>
+    </div>
+  </div>
+  <div class="container">
+    <div class="field col-lg-6">
+      <%= f.label :away_team_id %><br>
+      <%= f.select :away_team_id, TeamInstance.all.collect {|x| [x.team.name, x.id]}, {:prompt => "Select a team"} %>
+    </div>
+    <div class="field col-lg-6">
+      <%= f.label :away_team_score %><br>
+      <%= f.number_field :away_team_score %>
+    </div>
+  </div>
 
-  <div class="field">
-    <%= f.label :home_team_id %><br>
-    <%= f.select :home_team_id, TeamInstance.all.collect {|x| [x.team.name, x.id]}, {:prompt => "Select a team"} %>
 
-  </div>
-  <div class="field">
-    <%= f.label :away_team_id %><br>
-    <%= f.select :away_team_id, TeamInstance.all.collect {|x| [x.team.name, x.id]}, {:prompt => "Select a team"} %>
-  </div>
-  <div class="field">
-    <%= f.label :home_team_score %><br>
-    <%= f.number_field :home_team_score %>
-  </div>
-  <div class="field">
-    <%= f.label :away_team_score %><br>
-    <%= f.number_field :away_team_score %>
-  </div>
   <div class="field">
     <%= f.label :start_time %><br>
     <%= f.datetime_select :start_time %>

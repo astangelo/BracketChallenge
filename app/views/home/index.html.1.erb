@@ -1,0 +1,480 @@
+<style>
+.bracket {
+	margin: 1.6em;
+	position: relative;
+	font-size:14px;
+}
+.round {
+	//margin: 1.6em;
+	display: block;
+	position: relative;
+	float:left;
+}
+.round1 {}
+.round2 {
+	padding: 0  0 40px 40px;
+	margin-top: 2.1em;
+}
+.round3 {
+	padding: 0  0 40px 40px;
+	margin-top: 6.5em;
+}
+.round4 {
+	padding: 0  0 40px 40px;
+	margin-top: 15.0em;
+}
+.eigth {
+	/*width:100px;*/
+	float:left;
+	clear:both;
+}
+.eigth:nth-child(n+2){
+	margin-top:1em;
+}
+.two_game_holder {
+	padding-top: 0;
+	margin-top: 2.4em;
+}
+.two_game_holder:first-child {
+	margin-top: 0;
+}
+.game_holder {
+	display: block;
+	width: 80px;
+	z-index: 10;
+	position: relative;
+    box-sizing: border-box;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 11.2px;
+    line-height: 1.42857143;
+    color: #333333;
+}
+.game_holder:nth-child(3n+4) {
+	//border:2px solid #F00;
+	margin-top:2.4em;
+}
+.two_game_holder .game_holder:last-child {
+	margin-top: 2.8em;
+}
+.game_holder:nth-child(3n) {
+	margin-top: 2.8em;
+}
+.round2 .game_holder:nth-child(3n) {
+	margin-top: 8.2em;
+}
+.round2 .game_holder:nth-child(4n) {
+	margin-top: 7.9em;
+}
+.round3 .game_holder:nth-child(3) {
+	margin-top: 19.5em;
+}
+.game_holder:hover {
+	overflow:visible;
+}
+.game_holder .team {
+	border-radius: 8px 8px 0 0;
+	background-color: #AAAAAA;
+	padding-left: 1em;
+	border:1px solid #888;
+	border-collapse: collapse;
+	height: 1.4em;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.game_holder .team:last-child {
+	border-radius: 0 0 8px 8px;
+	top: -1px;
+}
+.game_holder .team:hover {
+	background-color: #CCCCCC;
+	overflow: visible;
+}
+.game_holder .team.wrong_pick {
+	color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.game_holder .team:active {
+	color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+}
+.game_holder .team.selected.editable:hover {
+	color: #fff;
+    background-color: #449d44;
+    border-color: #398439;
+}
+.game_holder .team:focus {
+	outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+
+
+
+
+
+
+.game_holder .lbl_team {
+	border-radius: 8px 8px 0 0 !important; 
+	background-color: #AAAAAA;
+	padding-left: 1em !important;
+	border:1px solid #888;
+	border-collapse: collapse !important;
+	height: 1.4em !important;
+	overflow: hidden;
+	white-space: nowrap !important;
+	float: inherit !important;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 11.2px !important;
+    line-height: 1.42857143 !important;
+    color: #333333;
+    position:static !important;
+    text-align: left !important;
+    margin: 0 0 0 0 !important;
+
+    background-origin: padding-box;
+    padding-bottom: 0px;
+    padding-left: 3px !important;
+    padding-right: 0px;
+    padding-top: 0px;
+
+
+background-color: rgb(170, 170, 170);
+border-bottom-color:rgb(136, 136, 136);
+border-bottom-left-radius:0px;
+border-bottom-right-radius:0px;
+border-bottom-style:solid;
+border-bottom-width:1px;
+border-collapse:collapse;
+border-image-outset: 0px;
+border-image-repeat: stretch;
+border-image-slice: 100%;
+border-image-source: none;
+border-image-width: 1;
+border-left-color: rgb(136, 136, 136);
+border-left-style: solid;
+border-left-width: 1px;
+border-right-color: rgb(136, 136, 136);
+border-right-style: solid;
+border-right-width: 1px;
+border-top-color: rgb(136, 136, 136);
+border-top-left-radius: 8px;
+border-top-right-radius: 8px;
+border-top-style: solid;
+border-top-width: 1px;
+box-sizing: border-box;
+color: rgb(51, 51, 51);
+display: block;
+font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+font-size: 11.2px;
+height: 19.6px;
+line-height: 16px;
+overflow-x: hidden;
+overflow-y: hidden;
+padding-left: 11.2px;
+white-space: nowrap;
+width: 80px;
+}
+.game_holder .lbl_team:after, .game_holder .lbl_team:before, .game_holder:after, .game_holder:before {    box-sizing: border-box;}
+.game_holder .lbl_team:last-child {
+	border-radius: 0 0 8px 8px !important;
+	top: -1px;
+}
+.game_holder .lbl_team.editable:hover {
+	background-color: #CCCCCC;
+	overflow: visible;
+}
+.game_holder .lbl_team.wrong_pick {
+	color: #fff;
+    background-color: #d9534f;
+    border-color: #d43f3a;
+}
+.game_holder .lbl_team.active {
+	color: #fff;
+    background-color: #5cb85c;
+    border-color: #4cae4c;
+    text-shadow: 1px 1px #999;
+}
+.game_holder .lbl_team.active.editable:hover {
+	color: #eee;
+    background-color: #449d44;
+    border-color: #398439;
+}
+.game_holder .lbl_team:focus {
+	outline: 5px auto -webkit-focus-ring-color;
+    outline-offset: -2px;
+}
+.vertical {
+	transform: rotate(90deg);
+	transform-origin: left top 0;
+    text-align: center;
+    width: 34em;
+    font-weight: bold;
+    background-color: #C1F0F6;
+}
+
+
+
+
+
+.bracket-lines {
+	border-top: 2px solid #000000;
+	border-bottom: 2px solid #000000;
+	border-right: 2px solid #000000;
+	border-left: 0px;
+	border-radius: 0 4px 4px 0;
+	display: block;
+	position: absolute;
+	height: 4.6em;
+	width: 80px;
+	//top:-.75em;
+	z-index: 9;
+	margin-top: -1.2em;
+    margin-left: 60px;
+}
+.round2 .bracket-lines{
+	height: 9.0em;
+}
+.round3 .bracket-lines {
+	height: 18em;
+}
+.quad>.bracket-lines {
+	height: 17.2em;
+	margin-top: 7.5em;
+}
+
+</style>
+<!-- ko with: bModel -->
+<div class="btn btn-primary" data-bind="click: savePicks">Save</div>
+<!-- /ko -->
+<button type="button" class="btn btn-info btn-md" data-bind="click: function(){qModal().show('This is just to show that the modal works.<br/><br/>Yay!');}">Open Modal</button>
+<button type="button" class="btn btn-success btn-md" data-bind="click:toggleEditable, css:{'btn-success': editable(), 'btn-warning': !editable()}">Toggle Editable</button>
+<hr style="clear:both; padding: 1em 0 .5em; position: relative; top: 1em;" />
+<div class="well"  style="margin:.25em auto; width:350px;">
+  <center data-bind="foreach: users">
+	<div class="btn btn-info btn-md" data-bind="text: first_name, click:function(){$parent.selectedUserId(id)}">Actual</div>
+  </center>
+</div>
+<div class="well"  style="margin:.25em auto; width:350px;">
+	<div class="btn btn-primary btn-md" data-bind="click:function(){bracketMode(0)}">Actual</div>
+	<div class="btn btn-success btn-md" data-bind="click:function(){bracketMode(1)}">Selected</div>
+	<div class="btn btn-warning btn-md" data-bind="click:function(){bracketMode(2)}">Random</div>
+	<div class="btn btn-danger btn-md" data-bind="click:function(){bracketMode(3)}">Suicide</div>
+	<br />
+	<center><h3><span class="label label-default" style="text-transform: capitalize;" data-bind="text:bracketModeOptions[bracketMode()]"></span> | <span class="label label-default" style="text-transform: capitalize;" data-bind="text:selectedUser().first_name">test</span> </h3></center>
+</div>
+
+
+<hr style="clear:both; padding: .5em 0 1em; position: relative; top: 1em;" />
+<div class="bracket" style="clear: both;" data-bind="with: bModel">
+<div data-bind="text:'EAST'" class="vertical"></div>
+<!-- ko foreach: rounds.slice(0).reverse() -->
+  <div class="round" data-bind="css: roundClass, foreach: games">
+  	  <!-- ko if: ($index()%2 == 1)-->
+	  <div class="bracket-lines"></div>
+	  <!-- /ko -->
+		  <div class="bzn-group game_holder" data-toggle="buttons">
+	  <!-- ko foreach: teams -->
+		  	<label class="bzn bzn-primary lbl_team" data-bind="text: ($data ? '('+($data.seed+1)+') '+name : ''), css: {'active': (($data||0)==$parent.winner()), editable: $parent.editable()}, click: ($data ? $data.click() : '')"></label>
+   	  <!-- /ko -->
+ 		  </div>
+
+  </div>
+
+<!-- /ko -->
+
+</div>
+
+
+<hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
+
+
+<div class="bracket" style="clear: both;" data-bind="with: bModel">
+<!-- fko foreach: games -->
+  <!--div class="quad quad1">
+  	<div class="eigth">
+		<div class="round round1">
+			<div class="two_game_holder">
+			  <div class="bzn-group game_holder" data-toggle="buttons" data-bind="with:games[0]">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: topTeam">
+			  		<input type="radio" name="game1" id="option1" autocomplete="off" value="Purdue" >Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: bottomTeam">
+		  			<input type="radio" name="game1" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			  <div class="bracket-lines"></div>
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].topTeam">
+			  		<input type="radio" name="game2" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].bottomTeam">
+		  			<input type="radio" name="game2" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			</div>
+			<div class="two_game_holder">
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().topTeam">
+			  		<input type="radio" name="game3" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().bottomTeam">
+		  			<input type="radio" name="game3" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			  <div class="bracket-lines"></div>
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().topTeam">
+			  		<input type="radio" name="game4" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().bottomTeam">
+		  			<input type="radio" name="game4" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			</div>
+		</div>
+		<div class="round round2">
+			<div class="two_game_holder">
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().topTeam">
+			  		<input type="radio" name="game5" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().bottomTeam">
+		  			<input type="radio" name="game5" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			  <div class="bracket-lines"></div>
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().topTeam">
+			  		<input type="radio" name="game6" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().bottomTeam">
+		  			<input type="radio" name="game6" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			</div>
+		</div>
+		<div class="round round3">
+			<div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().topTeam">
+			  		<input type="radio" name="game7" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().bottomTeam">
+		  			<input type="radio" name="game7" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		</div>
+		</div>	
+	</div>
+	<div class="bracket-lines" data-bind="style: { marginLeft: parseInt(0.9 * $('.eigth').first().width())+'px' }"></div>
+  	<div class="eigth">
+		<div class="round round1">
+			<div class="two_game_holder">
+			  <div class="bzn-group game_holder" data-toggle="buttons" data-bind="with:games[0]">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: topTeam">
+			  		<input type="radio" name="game1" id="option1" autocomplete="off" value="Purdue" >Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: bottomTeam">
+		  			<input type="radio" name="game1" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			  <div class="bracket-lines"></div>
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].topTeam">
+			  		<input type="radio" name="game2" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: games[1].bottomTeam">
+		  			<input type="radio" name="game2" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			</div>
+			<div class="two_game_holder">
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().topTeam">
+			  		<input type="radio" name="game3" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().rightChild().bottomTeam">
+		  			<input type="radio" name="game3" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			  <div class="bracket-lines"></div>
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().topTeam">
+			  		<input type="radio" name="game4" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().leftChild().bottomTeam">
+		  			<input type="radio" name="game4" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			</div>
+		</div>
+		<div class="round round2">
+			<div class="two_game_holder">
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().topTeam">
+			  		<input type="radio" name="game5" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().rightChild().bottomTeam">
+		  			<input type="radio" name="game5" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			  <div class="bracket-lines"></div>
+			  <div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().topTeam">
+			  		<input type="radio" name="game6" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().leftChild().bottomTeam">
+		  			<input type="radio" name="game6" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		  </div>
+			</div>
+		</div>
+		<div class="round round3">
+			<div class="bzn-group game_holder" data-toggle="buttons">
+			  	<label class="bzn bzn-primary lbl_team" data-bind="text: tree().topTeam">
+			  		<input type="radio" name="game7" id="option1" autocomplete="off" value="Purdue">Purdue
+		  		</label>
+		  		<label class="bzn bzn-primary lbl_team" data-bind="text: tree().bottomTeam">
+		  			<input type="radio" name="game7" id="option2" autocomplete="off" value="University of Southern Indiana">University of Southern Indiana
+		  		</label>
+	  		</div>
+		</div>	
+	</div>
+  </div-->
+<!-- /fko -->
+</div>
+
+<hr style="clear:both; padding: 1em 0; position: relative; top: 1em;" />
+
+<%= link_to "Greeting", '#', onclick: "ommit(2); return false", class: "nav_link"
+ %>
+ <input type="text" id="txt_input" value="Hello World"></input>
+ <div id="linkStatus"></div>
+ <div id="messageDiv"></div>
+
+
+ <!-- Trigger the modal with a button -->
+<!--button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#myModal">Open Modal</button-->
+<div data-bind="click: function(){$('#myModal').modal('show');}">Click to launch modal via JS </div>
+
+<!-- Modal -->
+<!-- ko with: bModel.qModal -->
+<div id="myModal" class="modal fade" role="dialog" data-bind="css: status">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header" style='font-weight:bold;'>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title" data-bind="html:headerText">Modal Header</h4>
+      </div>
+      <div class="modal-body" data-bind="html:message">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+<!-- /ko -->
